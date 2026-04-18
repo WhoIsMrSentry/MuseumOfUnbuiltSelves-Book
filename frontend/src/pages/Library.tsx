@@ -2,22 +2,18 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { BookMarked, Layers, ChevronRight } from 'lucide-react';
-import { getAllBooks } from '@/utils/markdown';
+import { getAllBooks, enrichBookMeta } from '@/utils/markdown';
 import { getProgress } from '@/store/progress';
 import type { Book } from '@/utils/markdown';
 
 // MARK: - Library Page (Landing)
 export default function Library() {
-  const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(true);
+  // getAllBooks() is synchronous — zero fetches, instant render
+  const [books, setBooks] = useState<Book[]>(() => getAllBooks());
 
+  // Enrich each book with first-page metadata (description/date) lazily
   useEffect(() => {
-    async function load() {
-      try { setBooks(await getAllBooks()); }
-      catch (e) { console.error("Failed to load books:", e); }
-      finally { setLoading(false); }
-    }
-    load();
+    Promise.all(books.map((b) => enrichBookMeta(b))).then(setBooks);
   }, []);
 
   return (
@@ -36,11 +32,7 @@ export default function Library() {
 
       {/* MARK: - Book Grid */}
       <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {loading ? (
-          <div className="col-span-full py-16 text-center text-[var(--muted-color)] rounded-2xl border border-dashed border-white/8 bg-white/3">
-            Loading books...
-          </div>
-        ) : books.length === 0 ? (
+        {books.length === 0 ? (
           <div className="col-span-full py-16 text-center text-[var(--muted-color)] rounded-2xl border border-dashed border-white/8 bg-white/3 flex flex-col items-center gap-3">
             <BookMarked size={40} className="opacity-40" />
             <p className="text-sm">No books yet.</p>

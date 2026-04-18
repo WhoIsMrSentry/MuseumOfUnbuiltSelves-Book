@@ -2,20 +2,13 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { AnimatePresence, motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
-  LoaderCircle,
-  Settings2,
-  X,
-} from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, LoaderCircle, Settings2, X } from 'lucide-react';
 import { useSettings } from '@/store/settings';
 import { clearProgress, getProgress, setProgress } from '@/store/progress';
-import { getBookBySlug } from '@/utils/markdown';
+import { getBookBySlug, getPageContent } from '@/utils/markdown';
 import type { Book, Page } from '@/utils/markdown';
 
-// MARK: - Types & Constants
+// MARK: - Constants
 type SettingChoice<T extends string> = { label: string; value: T };
 
 const THEME_OPTIONS: SettingChoice<'obsidian' | 'amoled'>[] = [
@@ -29,104 +22,103 @@ const FONT_OPTIONS: SettingChoice<'default' | 'serif' | 'comic'>[] = [
   { value: 'comic', label: 'Playful' },
 ];
 
-const TOOLBAR_AUTO_HIDE_MS = 3500;
+const TOOLBAR_HIDE_MS = 3500;
 
-// MARK: - Reader Component
+// MARK: - Reader
 export default function Reader() {
   const { bookSlug, pageSlug } = useParams<{ bookSlug: string; pageSlug: string }>();
   const navigate = useNavigate();
   const { settings, updateSettings } = useSettings();
 
   const [book, setBook] = useState<Book | null>(null);
+  const [page, setPage] = useState<Page | null>(null);
   const [loading, setLoading] = useState(true);
   const [toolbarVisible, setToolbarVisible] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const savedPageSlug = useMemo(() => getProgress(bookSlug || ''), [bookSlug]);
+  const savedSlug = useMemo(() => getProgress(bookSlug || ''), [bookSlug]);
 
-  // MARK: - Load book
+  // MARK: - Load book index (synchronous — zero fetches)
   useEffect(() => {
-    async function loadBook() {
-      if (!bookSlug) { navigate('/', { replace: true }); return; }
-      setLoading(true);
-      try {
-        const data = await getBookBySlug(bookSlug);
-        if (!data) { navigate('/', { replace: true }); return; }
-        setBook(data);
-      } catch {
-        navigate('/', { replace: true });
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadBook();
+    if (!bookSlug) { navigate('/', { replace: true }); return; }
+    const b = getBookBySlug(bookSlug);
+    if (!b) { navigate('/', { replace: true }); return; }
+    setBook(b);
+    setLoading(false);
   }, [bookSlug, navigate]);
 
-  // MARK: - Resolve page index from URL / saved progress
+  // MARK: - Resolve page index
   const pageIndex = useMemo(() => {
     if (!book) return -1;
     if (pageSlug) {
       const idx = book.pages.findIndex((p) => p.pageSlug === pageSlug);
       if (idx >= 0) return idx;
     }
-    if (savedPageSlug) {
-      const idx = book.pages.findIndex((p) => p.pageSlug === savedPageSlug);
+    if (savedSlug) {
+      const idx = book.pages.findIndex((p) => p.pageSlug === savedSlug);
       if (idx >= 0) return idx;
     }
     return 0;
-  }, [book, pageSlug, savedPageSlug]);
+  }, [book, pageSlug, savedSlug]);
 
   const totalPages = book?.pages.length ?? 0;
-  const activePage = book && pageIndex >= 0 ? book.pages[pageIndex] : null;
-  const prevPage = book && pageIndex > 0 ? book.pages[pageIndex - 1] : null;
-  const nextPage = book && pageIndex >= 0 && pageIndex < totalPages - 1 ? book.pages[pageIndex + 1] : null;
-
-  const pagePath = useCallback((page: Page) => `/reader/${page.bookSlug}/${page.pageSlug}`, []);
+  const entry = book && pageIndex >= 0 ? book.pages[pageIndex] : null;
+  const hasPrev = pageIndex > 0;
+  const hasNext = pageIndex >= 0 && pageIndex < totalPages - 1;
 
   // MARK: - Route sync
   useEffect(() => {
-    if (loading || !book || pageIndex < 0) return;
-    const resolvedSlug = book.pages[pageIndex].pageSlug;
-    if (pageSlug !== resolvedSlug) {
-      navigate(pagePath(book.pages[pageIndex]), { replace: true });
+    if (loading || !book || !entry) return;
+    if (pageSlug !== entry.pageSlug) {
+      navigate(`/reader/${book.bookSlug}/${entry.pageSlug}`, { replace: true });
     }
-  }, [book, loading, pageIndex, pageSlug, navigate, pagePath]);
+  }, [book, loading, entry, pageSlug, navigate]);
+
+  // MARK: - Load single page content on demand
+  useEffect(() => {
+    if (!book || !entry) return;
+    setPage(null); // clear old content while loading
+    getPageContent(book.bookSlug, entry.pageSlug).then((p) => setPage(p));
+  }, [book, entry]);
 
   // MARK: - Save progress
   useEffect(() => {
-    if (!book || pageIndex < 0 || pageIndex >= book.pages.length) return;
-    setProgress(book.bookSlug, book.pages[pageIndex].pageSlug);
-  }, [pageIndex, book]);
+    if (!book || !entry) return;
+    setProgress(book.bookSlug, entry.pageSlug);
+  }, [book, entry]);
 
   // MARK: - Scroll to top on page change
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [pageSlug]);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'auto' }); }, [pageSlug]);
 
-  // MARK: - Keyboard navigation
+  // MARK: - Navigation helpers
+  const goTo = useCallback((idx: number) => {
+    if (!book || idx < 0 || idx >= book.pages.length) return;
+    navigate(`/reader/${book.bookSlug}/${book.pages[idx].pageSlug}`);
+  }, [book, navigate]);
+
+  const goPrev = useCallback(() => goTo(pageIndex - 1), [goTo, pageIndex]);
+  const goNext = useCallback(() => goTo(pageIndex + 1), [goTo, pageIndex]);
+
+  // MARK: - Keyboard nav
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement)?.closest('button, a, input, textarea, select')) return;
-      if (e.key === 'ArrowLeft' && prevPage) navigate(pagePath(prevPage));
-      if (e.key === 'ArrowRight' && nextPage) navigate(pagePath(nextPage));
+      if (e.key === 'ArrowLeft') goPrev();
+      if (e.key === 'ArrowRight') goNext();
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [navigate, nextPage, prevPage, pagePath]);
+  }, [goPrev, goNext]);
 
   // MARK: - Toolbar auto-hide
   const resetHideTimer = useCallback(() => {
     if (hideTimer.current) clearTimeout(hideTimer.current);
-    hideTimer.current = setTimeout(() => setToolbarVisible(false), TOOLBAR_AUTO_HIDE_MS);
+    hideTimer.current = setTimeout(() => setToolbarVisible(false), TOOLBAR_HIDE_MS);
   }, []);
 
   const toggleToolbar = useCallback(() => {
-    setToolbarVisible((v) => {
-      const next = !v;
-      if (next) resetHideTimer();
-      return next;
-    });
+    setToolbarVisible((v) => { const next = !v; if (next) resetHideTimer(); return next; });
   }, [resetHideTimer]);
 
   useEffect(() => {
@@ -134,25 +126,12 @@ export default function Reader() {
     return () => { if (hideTimer.current) clearTimeout(hideTimer.current); };
   }, [pageSlug, resetHideTimer]);
 
-  // MARK: - Center-tap handler (viewport-based)
-  const handleContentClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  // MARK: - Center-tap
+  const handleTap = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).closest('a, button, input')) return;
     const relY = e.clientY / window.innerHeight;
     if (relY > 0.25 && relY < 0.75) toggleToolbar();
   }, [toggleToolbar]);
-
-  // MARK: - Navigation
-  const goRelative = useCallback((delta: number) => {
-    if (!book) return;
-    const next = pageIndex + delta;
-    if (next < 0 || next >= totalPages) return;
-    navigate(pagePath(book.pages[next]));
-  }, [book, pageIndex, totalPages, navigate, pagePath]);
-
-  const handleSliderChange = useCallback((idx: number) => {
-    if (!book) return;
-    navigate(pagePath(book.pages[idx]));
-  }, [book, navigate, pagePath]);
 
   // MARK: - Loading
   if (loading) {
@@ -163,11 +142,10 @@ export default function Reader() {
     );
   }
 
-  if (!book || !activePage) return null;
+  if (!book || !entry) return null;
 
-  // MARK: - Render
   return (
-    <div className="relative min-h-svh bg-[var(--bg-color)] text-[var(--text-color)]" onClick={handleContentClick}>
+    <div className="relative min-h-svh bg-[var(--bg-color)] text-[var(--text-color)]" onClick={handleTap}>
       {/* Progress bar */}
       <ProgressBar current={pageIndex + 1} total={totalPages} />
 
@@ -191,12 +169,8 @@ export default function Reader() {
             className="fixed inset-x-0 top-0 z-50 flex items-center gap-3 border-b border-white/8 bg-[var(--bg-color)]/90 px-4 py-3 pl-14 backdrop-blur-md sm:pl-16"
           >
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-[var(--text-color)]">
-                {activePage.metadata.title}
-              </p>
-              <p className="truncate text-xs text-[var(--muted-color)]">
-                {book.title} · {pageIndex + 1}/{totalPages}
-              </p>
+              <p className="truncate text-sm font-medium text-[var(--text-color)]">{entry.metadata.title}</p>
+              <p className="truncate text-xs text-[var(--muted-color)]">{book.title} · {pageIndex + 1}/{totalPages}</p>
             </div>
           </motion.header>
         )}
@@ -204,16 +178,24 @@ export default function Reader() {
 
       {/* Content */}
       <div className="mx-auto max-w-3xl px-4 pb-28 pt-14 sm:px-6 md:px-8">
-        <ChapterBlock page={activePage} number={pageIndex + 1} />
-        <PaginationNav
-          bookSlug={book.bookSlug}
-          prevPage={prevPage}
-          nextPage={nextPage}
-          onFinish={() => clearProgress(book.bookSlug)}
-        />
+        {page ? (
+          <>
+            <ChapterContent page={page} number={pageIndex + 1} />
+            <PaginationNav
+              bookSlug={book.bookSlug}
+              prevPage={hasPrev ? book.pages[pageIndex - 1] : null}
+              nextPage={hasNext ? book.pages[pageIndex + 1] : null}
+              onFinish={() => clearProgress(book.bookSlug)}
+            />
+          </>
+        ) : (
+          <div className="flex items-center justify-center py-32 text-[var(--muted-color)]">
+            <LoaderCircle size={20} className="animate-spin" />
+          </div>
+        )}
       </div>
 
-      {/* Bottom toolbar */}
+      {/* Bottom bar — simple: ‹ Prev | Page X of Y | Next › | ⚙ */}
       <AnimatePresence>
         {toolbarVisible && (
           <motion.nav
@@ -223,37 +205,22 @@ export default function Reader() {
             transition={{ duration: 0.2, ease: 'easeOut' }}
             className="fixed inset-x-0 bottom-0 z-50 border-t border-white/8 bg-[var(--bg-color)]/90 px-3 pb-[calc(0.65rem+env(safe-area-inset-bottom))] pt-2.5 backdrop-blur-md sm:px-4 sm:pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:pt-3"
           >
-            <div className="mx-auto flex max-w-3xl items-center gap-1.5 sm:gap-2">
-              <NavButton disabled={!prevPage} icon={<ChevronLeft size={18} />} onClick={() => goRelative(-1)} />
-
-              <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-white/8 bg-white/4 px-3 py-2 sm:gap-3 sm:px-4">
-                <span className="text-[11px] tabular-nums text-[var(--muted-color)] sm:text-xs">{pageIndex + 1}</span>
-                <input
-                  type="range"
-                  min={0}
-                  max={totalPages - 1}
-                  value={pageIndex}
-                  onChange={(e) => handleSliderChange(Number(e.target.value))}
-                  className="reader-slider min-w-0 flex-1"
-                />
-                <span className="text-[11px] tabular-nums text-[var(--muted-color)] sm:text-xs">{totalPages}</span>
-              </div>
-
-              <NavButton disabled={!nextPage} icon={<ChevronRight size={18} />} onClick={() => goRelative(1)} />
-              <NavButton icon={<Settings2 size={18} />} onClick={() => { setShowSettings(true); setToolbarVisible(true); }} />
+            <div className="mx-auto flex max-w-3xl items-center justify-between gap-1">
+              <NavBtn disabled={!hasPrev} icon={<ChevronLeft size={18} />} label="Prev" onClick={goPrev} />
+              <span className="text-xs tabular-nums text-[var(--muted-color)] sm:text-sm">
+                {pageIndex + 1} / {totalPages}
+              </span>
+              <NavBtn disabled={!hasNext} icon={<ChevronRight size={18} />} label="Next" onClick={goNext} />
+              <NavBtn icon={<Settings2 size={18} />} onClick={() => { setShowSettings(true); setToolbarVisible(true); }} />
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
 
-      {/* Settings sheet */}
+      {/* Settings */}
       <AnimatePresence>
         {showSettings && (
-          <SettingsSheet
-            settings={settings}
-            onClose={() => setShowSettings(false)}
-            onUpdate={updateSettings}
-          />
+          <SettingsSheet settings={settings} onClose={() => setShowSettings(false)} onUpdate={updateSettings} />
         )}
       </AnimatePresence>
     </div>
@@ -270,13 +237,11 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
   );
 }
 
-// MARK: - Chapter Block
-function ChapterBlock({ page, number }: { page: Page; number: number }) {
+// MARK: - Chapter Content
+function ChapterContent({ page, number }: { page: Page; number: number }) {
   return (
     <article className="py-6">
-      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-[var(--muted-color)]">
-        Chapter {number}
-      </p>
+      <p className="mb-2 text-xs font-medium uppercase tracking-widest text-[var(--muted-color)]">Chapter {number}</p>
       <h2 className="mb-6 text-xl font-semibold tracking-tight text-[var(--text-color)] sm:text-2xl md:text-3xl">
         {page.metadata.title}
       </h2>
@@ -292,18 +257,19 @@ function ChapterBlock({ page, number }: { page: Page; number: number }) {
 
 // MARK: - Pagination Nav
 function PaginationNav({ bookSlug, prevPage, nextPage, onFinish }: {
-  bookSlug: string; prevPage: Page | null; nextPage: Page | null; onFinish: () => void;
+  bookSlug: string; prevPage: { pageSlug: string; metadata: { title: string } } | null;
+  nextPage: { pageSlug: string; metadata: { title: string } } | null; onFinish: () => void;
 }) {
-  const path = (p: Page) => `/reader/${bookSlug}/${p.pageSlug}`;
+  const path = (slug: string) => `/reader/${bookSlug}/${slug}`;
   return (
     <div className="mt-10 grid gap-3 sm:grid-cols-2">
       {prevPage ? (
-        <PageLink to={path(prevPage)} label="Previous" title={prevPage.metadata.title} align="left" />
+        <PageLink to={path(prevPage.pageSlug)} label="Previous" title={prevPage.metadata.title} align="left" />
       ) : (
         <div className="hidden sm:block" />
       )}
       {nextPage ? (
-        <PageLink to={path(nextPage)} label="Next" title={nextPage.metadata.title} align="right" />
+        <PageLink to={path(nextPage.pageSlug)} label="Next" title={nextPage.metadata.title} align="right" />
       ) : (
         <PageLink to="/" label="Finished" title="Back to Library" align="right" onClick={onFinish} />
       )}
@@ -316,9 +282,7 @@ function PageLink({ to, label, title, align, onClick }: {
 }) {
   const isRight = align === 'right';
   return (
-    <Link
-      to={to}
-      onClick={onClick}
+    <Link to={to} onClick={onClick}
       className={`flex min-h-[64px] items-center gap-3 rounded-2xl border border-white/8 bg-white/3 px-4 py-3 text-[var(--text-color)] transition-colors hover:bg-white/6 active:scale-[0.98] sm:px-5 sm:py-4 ${isRight ? 'justify-between text-right' : ''}`}
     >
       {!isRight && <ChevronLeft size={16} className="shrink-0 text-[var(--muted-color)]" />}
@@ -332,37 +296,27 @@ function PageLink({ to, label, title, align, onClick }: {
 }
 
 // MARK: - Nav Button
-function NavButton({ icon, onClick, disabled = false }: { icon: ReactNode; onClick: () => void; disabled?: boolean }) {
+function NavBtn({ icon, onClick, disabled = false, label }: { icon: ReactNode; onClick: () => void; disabled?: boolean; label?: string }) {
   return (
-    <button
-      type="button"
-      onClick={(e) => { e.stopPropagation(); onClick(); }}
-      disabled={disabled}
-      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[var(--text-color)] transition-colors hover:bg-white/8 active:scale-95 disabled:opacity-30 disabled:pointer-events-none"
+    <button type="button" onClick={(e) => { e.stopPropagation(); onClick(); }} disabled={disabled}
+      className="flex h-10 shrink-0 items-center gap-1.5 rounded-full px-2 text-[var(--text-color)] transition-colors hover:bg-white/8 active:scale-95 disabled:opacity-30 disabled:pointer-events-none sm:px-3"
     >
       {icon}
+      {label && <span className="hidden text-xs font-medium sm:inline">{label}</span>}
     </button>
   );
 }
 
 // MARK: - Settings Sheet
 function SettingsSheet({ settings, onClose, onUpdate }: {
-  settings: ReturnType<typeof useSettings>['settings'];
-  onClose: () => void;
+  settings: ReturnType<typeof useSettings>['settings']; onClose: () => void;
   onUpdate: ReturnType<typeof useSettings>['updateSettings'];
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm"
-      onClick={onClose}
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm" onClick={onClose}
     >
-      <motion.div
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        exit={{ y: '100%' }}
+      <motion.div initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 28, stiffness: 340 }}
         onClick={(e) => e.stopPropagation()}
         className="absolute inset-x-0 bottom-0 max-h-[65vh] overflow-y-auto rounded-t-3xl border-t border-white/8 bg-[var(--card-color)] px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4 sm:px-5"
@@ -370,9 +324,7 @@ function SettingsSheet({ settings, onClose, onUpdate }: {
         <div className="mx-auto mb-5 h-1 w-10 rounded-full bg-white/12" />
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-[var(--text-color)]">Settings</h2>
-          <button
-            type="button"
-            onClick={onClose}
+          <button type="button" onClick={onClose}
             className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--muted-color)] transition-colors hover:bg-white/8 active:scale-95"
           >
             <X size={16} />
@@ -394,10 +346,7 @@ function OptionRow<T extends string>({ label, options, value, onChange }: {
       <p className="mb-2 text-xs font-medium uppercase tracking-widest text-[var(--muted-color)]">{label}</p>
       <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
-          <button
-            key={opt.value}
-            type="button"
-            onClick={() => onChange(opt.value)}
+          <button key={opt.value} type="button" onClick={() => onChange(opt.value)}
             className={`rounded-full px-4 py-2 text-sm font-medium transition-colors active:scale-95 ${
               opt.value === value
                 ? 'bg-[var(--text-color)] text-[var(--bg-color)]'

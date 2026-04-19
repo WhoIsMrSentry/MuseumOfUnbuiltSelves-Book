@@ -11,7 +11,7 @@ export default function Library() {
   // getAllBooks() is synchronous — zero fetches, instant render
   const [books, setBooks] = useState<Book[]>(() => getAllBooks());
 
-  // Enrich each book with first-page metadata (description/date) lazily
+  // Enrich each book with first-page metadata lazily
   useEffect(() => {
     Promise.all(books.map((b) => enrichBookMeta(b))).then(setBooks);
   }, []);

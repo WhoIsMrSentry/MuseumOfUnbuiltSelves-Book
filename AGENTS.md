@@ -22,7 +22,6 @@ All `.mdx` content files MUST begin with a YAML Frontmatter block delineated by 
 ---
 title: "Chapter 1: An Expected Journey"
 description: "Used primarily as a subheadline, and as the preview text for the Book card in the Library if it's the first page."
-date: "2026-04-19"
 cover: "url_to_image"
 ---
 ```
@@ -30,8 +29,9 @@ cover: "url_to_image"
 **Property Breakdown:**
 - `title` *(String / Required)*: The visible header of the page inside the Reader UI.
 - `description` *(String / Optional)*: A short synopsis. If this is the *first* page of a Book, the Library utilizes this description for the Book's preview card.
-- `date` *(String / Optional)*: Used for sorting books in the Library. Should be in sortable format (`YYYY-MM-DD`).
 - `cover` *(String / Optional)*: A future-proof token for attaching book covers.
+
+> **Note:** `date` is **not** stored in frontmatter. The "Son düzenlenme" (last modified) date is automatically derived from each file's filesystem modification time via a Vite plugin (`plugins/mdx-mtime.ts`). No manual date entry is needed.
 
 ## 3. Styling & The Reader Platform
 
@@ -43,4 +43,4 @@ cover: "url_to_image"
 - Avoid inserting arbitrary standalone `.mdx` files into the `stories/` root folder. They will not be rendered by my Library unless wrapped inside a dedicated book folder. 
 - Avoid quotes with inline commas or unescaped strings in my frontmatter unless strictly necessary; keep parsing simple.
 - **Short Lines (VS Code Compatibility):** All `.mdx` content should be formatted with manual line breaks (short lines) to ensure the text is easily readable and editable in VS Code without horizontal scrolling. Break lines at logical points (around 80-100 characters).
-
+- **Cover Images:** When generating AI cover images for chapters, ALWAYS draw the pure environment. DO NOT include characters, human figures, or silhouettes in the generated cover art.

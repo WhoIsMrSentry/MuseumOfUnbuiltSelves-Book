@@ -251,9 +251,12 @@ function ChapterContent({ page, number }: { page: Page; number: number }) {
         </div>
       )}
       <p className="mb-2 text-xs font-medium uppercase tracking-widest text-[var(--muted-color)]">Chapter {number}</p>
-      <h2 className="mb-6 text-xl font-semibold tracking-tight text-[var(--text-color)] sm:text-2xl md:text-3xl">
+      <h2 className="mb-4 text-xl font-semibold tracking-tight text-[var(--text-color)] sm:text-2xl md:text-3xl">
         {page.metadata.title}
       </h2>
+      {page.metadata.lastModified && (
+        <p className="mb-6 text-xs text-[var(--muted-color)] opacity-60">Son düzenlenme: {page.metadata.lastModified}</p>
+      )}
       {page.metadata.description && (
         <p className="mb-8 text-sm leading-relaxed text-[var(--muted-color)]">{page.metadata.description}</p>
       )}

@@ -1,10 +1,13 @@
 // MARK: - Markdown Utility
 
+// @ts-ignore — virtual module from plugins/mdx-mtime.ts
+import mtimeMap from 'virtual:mdx-mtime';
+
 export interface PageMetadata {
   title: string;
   description?: string;
-  date?: string;
   cover?: string;
+  lastModified?: string; // MARK: auto-derived from file mtime
 }
 
 /** Lightweight page stub — derived from file path alone, zero fetches */
@@ -23,7 +26,7 @@ export interface Book {
   bookSlug: string;
   title: string;
   description: string;
-  date: string;
+  lastModified: string;
   cover: string;
   pages: PageEntry[];
 }
@@ -51,7 +54,11 @@ function formatTitle(slug: string): string {
   return slug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
-// MARK: - Glob handle (lazy loaders, paths available immediately)
+// MARK: - File mtime lookup
+function getMtime(bookSlug: string, pageSlug: string): string {
+  return (mtimeMap as Record<string, string>)[`${bookSlug}/${pageSlug}`] || '';
+}
+
 // MARK: - Glob handle (lazy loaders, paths available immediately)
 const mdxFiles = import.meta.glob('../../../content/stories/**/*.{md,mdx}', { query: '?raw', import: 'default' });
 
@@ -69,13 +76,10 @@ export function resolveAsset(bookSlug: string, virtualPath: string): string {
   if (!virtualPath) return '';
   if (virtualPath.startsWith('http')) return virtualPath;
 
-  // Clean the virtual path: "/assets/chapter-1.png" -> "chapter-1.png"
   const fileName = virtualPath.split('/').pop();
   if (!fileName) return virtualPath;
 
-  // Look for the asset in the book's assets folder
   const targetPath = `../../../content/stories/${bookSlug}/assets/${fileName}`;
-  
   return assetFiles[targetPath] || virtualPath;
 }
 
@@ -106,7 +110,6 @@ let _indexCache: Book[] | null = null;
 /**
  * Builds the book index from glob paths alone — no file content is fetched.
  * Page metadata is derived from slug (title = formatted slug).
- * For Library description, only the first page of each book is fetched lazily.
  */
 function buildIndex(): Book[] {
   if (_indexCache) return _indexCache;
@@ -122,7 +125,7 @@ function buildIndex(): Book[] {
         bookSlug: parsed.bookSlug,
         title: formatTitle(parsed.bookSlug),
         description: '',
-        date: '',
+        lastModified: '',
         cover: '',
         pages: [],
       };
@@ -131,7 +134,10 @@ function buildIndex(): Book[] {
     booksMap[parsed.bookSlug].pages.push({
       pageSlug: parsed.pageSlug,
       bookSlug: parsed.bookSlug,
-      metadata: { title: formatTitle(parsed.pageSlug) },
+      metadata: {
+        title: formatTitle(parsed.pageSlug),
+        lastModified: getMtime(parsed.bookSlug, parsed.pageSlug),
+      },
     });
   }
 
@@ -170,7 +176,11 @@ export async function enrichBookMeta(book: Book): Promise<Book> {
   const meta = parseFrontmatter(raw);
   first.metadata = { ...first.metadata, ...meta, title: meta.title || first.metadata.title };
   book.description = meta.description || `${book.pages.length} chapters`;
-  book.date = meta.date || '';
+  // MARK: - Book lastModified = most recent page mtime
+  book.lastModified = book.pages.reduce((latest, p) => {
+    const m = p.metadata.lastModified || '';
+    return m > latest ? m : latest;
+  }, '');
   book.cover = resolveAsset(book.bookSlug, meta.cover || '');
   return book;
 }
@@ -189,8 +199,8 @@ export async function getPageContent(bookSlug: string, pageSlug: string): Promis
     metadata: {
       title: meta.title || formatTitle(pageSlug),
       description: meta.description || '',
-      date: meta.date || '',
       cover: resolveAsset(bookSlug, meta.cover || ''),
+      lastModified: getMtime(bookSlug, pageSlug),
     },
     content: contentMatch ? contentMatch[1].trim() : raw.trim(),
   };

@@ -142,7 +142,7 @@ function buildIndex(): Book[] {
   }
 
   _indexCache = Object.values(booksMap).map((book) => {
-    book.pages.sort((a, b) => a.pageSlug.localeCompare(b.pageSlug));
+    book.pages.sort((a, b) => a.pageSlug.localeCompare(b.pageSlug, undefined, { numeric: true }));
     book.description = `${book.pages.length} chapters`;
     return book;
   });

@@ -16,6 +16,8 @@ Enerji depolama ve işlem birimidir. Dışarıdan bakıldığında cam veya buz 
 - **Siyah Çekirdek (Ölü Çekirdek)**: Enerjisi tamamen boşalmış veya dış kalkan/kabuk vazifesi gören kısmın ayrılıp kömürleşmesiyle oluşan işlevsiz halidir. (Ezilerek devreler için iletken siyah toz yapımında kullanılır).
 - **Mor Faz**: Aşırı ısıya veya kapasite üstü yüklenmeye maruz kalan kristalin mora kayarak fazla enerjiyi düzenli ısı halinde dışarı sızdırdığı ara durum. Taşınabilir bir cep sobası gibi davranabilir ve çekirdeğin iç baskısının gözle okunmasına izin verir.
 - **Renk Sapması**: Bazı çekirdeklerde, özellikle slime özlerinde, saf maviliğin içinde turkuaz ve yeşile çalan girdaplar görülür. Bu durum enerjinin tek tip olmadığını, farklı niteliklere veya işlevsel alt spektrumlara ayrıldığını düşündürür.
+- **Tetiklenen Enerji Salımı**: Fiziksel darbe, yoğun ısı veya doğru runik bağlanma, kristalin içindeki asıl gücü serbest bırakan "ilk anahtar" işlevi görür. Darbenin kendisi çoğu zaman ana enerji kaynağı değil, baskı altındaki sistemi açan tetikleyicidir.
+- **Yüksek Enerji Yoğunluğu**: Küçük boyutlarına rağmen sıradan mekanik darbelerle açıklanamayacak ölçekte enerji taşıyabilirler. Bu yüzden tek bir kristal bile hem sanayi gücü hem de ciddi ekonomik değer anlamına gelir.
 
 ### Organik Kod (Rünler / Semboller)
 Çekirdeklerin içindeki ışıklı işaret dizileri. Bir makine kodu gibi işlev görürler ve kristalin çevreyle olan etkileşimini (hareket, ışık, ateş, savurma vb.) kontrol ederler. Her sembolün (keskin hatlı açılar, spiraller vb.) farklı bir mekanik işlemi vardır.
@@ -24,12 +26,15 @@ Enerji depolama ve işlem birimidir. Dışarıdan bakıldığında cam veya buz 
 - **Runik Alfabe**: Tek tek sembollerden daha büyük bir teknik dil düzeni. Çizgilerin kalınlığı, kıvrımların yönü, kesişimlerin açısı ve motiflerin dizilimi birlikte okunur; yani rünler sadece şekil değil, aynı zamanda dilbilgisidir.
 - **Zincir Halkası Motifi**: Düz iletken hatlardan farklı olarak iç içe geçmiş halkalar halinde işlenen bağlantı biçimi. Enerjinin akışını yumuşatmak, dönüştürmek ya da belli bir reaksiyona zorlamak için kullanılan daha hassas bir kanal mimarisi izlenimi verir.
 - **Kısa Devre Rünü**: Normal şartlarda bir hata ya da kusur sayılan, ancak kristalin gücünü filtrelemeden dışarı boşaltarak açık elektrik arkı üreten tehlikeli bağlanma formu. Kisho bunu ilk kez bir silah ve üretim tekniği olarak yorumlamıştır.
+- **Grup Rünleri**: Bazı işlevler tek bir sembolle değil, yan yana dizilmiş rün kümeleriyle oluşur. Anlam, tekil işaretlerde değil; sembollerin birlikte kurduğu akış ve yön komutunda ortaya çıkar.
+- **Döndürme Üçlüsü**: Boran Usta'nın kullandığı üç sembollü runik grup. Tek başına enerji akışı vermekten çok, belirli bir eksen etrafında kuvvet üretip dönme komutu oluşturan bir düzeni temsil eder; Kisho bunu tork/moment mantığıyla okumaya başlar.
+- **Ezberlenmiş Ustalık**: Yerel ustaların bir kısmı tüm runik dili çözmüş değildir; çoğu, işe yaradığını bildiği şekilleri ve düzenleri uygulamalı hafızayla tekrar eder. Yani pratik bilgi, teorik okuryazarlığın önüne geçebilir.
 
 ### Mavi Enerji (Mavi Sıvı / Biyolojik İletken)
 Ekosistemi besleyen temel güç kaynağı. Canlıların damarlarında sıvı formunda dolaşır. Kisho'nun "Biyolojik Batarya" teorisine göre, sıvı enerjinin ta kendisi değil, saf gücü (aurayı) taşıyan organik bir "bakır kablo" (iletken) ortamıdır. Kristaller bu sıvıya temas ettiğinde yerçekimine meydan okuyup içindeki aurayı iplik gibi sömürür ve geriye mat, tükenmiş bir sıvı bırakır. Zanaatkârlıkta ise ölü kristal tozu (siyah toz) ile karıştırılıp devre anakartlarındaki iletken yolları çizmek için mürekkep olarak kullanılır.
 
 ### Ozon Kokusu
-Yapay enerji emilimi veya yoğun teknolojik aktivite sırasında çevreye yayılan keskin, karakteristik koku. Biyo-teknolojik bir "çalışma" veya "anomali" göstergesidir.
+Yapay enerji emilimi veya yoğun teknolojik aktivite sırasında çevreye yayılan keskin, karakteristik koku. Biyo-teknolojik bir "çalışma" veya "anomali" göstergesidir. Kapalı atölyelerde uzun süre solunması tehlikeli olabilir; özellikle ark boşalımı sonrası duman ve metal artıklarıyla birleştiğinde zehirlenme riski taşır.
 
 ### Elektrik Arkı ve Ark Kaynağı
 Kristal enerjisinin bir hata noktası veya bilinçli kısa devre üzerinden mavi-beyaz plazma sıçramasına dönüşmüş hali. Uygun metal dolgu ile kullanıldığında yalnızca yıkıcı bir boşalma değil, çelik gibi sert alaşımları eritip birleştirebilen son derece hassas bir üretim tekniğine dönüşür.
@@ -106,7 +111,8 @@ Metalin, ateşin ve yaşamın kutsal bağı. Kristal gücüyle iki farklı mater
 Ocak Kanı ustalarının atölyelerde kurduğu mekanik sistemlerdir;
 1. **İletken Kan**: Mavi kan ve ezilmiş kül/siyah toz kristal ile fırça yardımıyla metalin üzerine devre yolları çizilir.
 2. **Komut Kazıması**: Hatların bağlantı noktası keski ile oyularak Rünler kazınır.
-3. **Kinetik ve Fiziksel Aktivasyon**: Güç kaynağı olacak saf kristal yuvaya (mengene yardımıyla) oturtulur ve devrenin uyanması için sisteme çekiçle şiddetli bir darbe ya da dışarıdan muazzam bir fırın ısısı verilir. Kristal bu fiziksel darbeyi ve sıcaklığı emer, mavi sıvı devresini tetikler, kinetik enerjiyi dönüş/ışık/hareket enerjisine çevirir.
+3. **Kinetik ve Fiziksel Aktivasyon**: Güç kaynağı olacak saf kristal yuvaya (mengene yardımıyla) oturtulur ve devrenin uyanması için sisteme çekiçle şiddetli bir darbe ya da dışarıdan muazzam bir fırın ısısı verilir. Son gözlemler, bu darbenin çoğu durumda asıl enerjiyi üretmekten çok kristalin içinde zaten birikmiş olan gücü serbest bırakan bir tetik işlevi gördüğünü düşündürmektedir.
+4. **Runik Kuvvet Yönlendirmesi**: Doğru sembol kümeleri, açığa çıkan enerjiyi yalnızca ışık veya ısıya değil; belirli bir eksende dönme, sıkma ya da sürekli mekanik işe çevirebilir. Bu, rünlerin bir tür "mekanik komut dili" gibi çalıştığını gösterir.
 
 ---
 
@@ -127,7 +133,7 @@ Sıkı disiplinli, "Doğulu Dili" dedikleri ve Türkçenin neredeyse birebir ayn
 Freygard garnizon şehrinin amiri ve Lord Valerius'a bağlı rütbeli muhafız birliği komutanı. Yüzünde savaş yaraları olan, adaletli ve "Doğulu dilini" (Türkçe) pürüzsüz konuşabilen deneyimli bir adamdır.
 
 ### Boran Usta
-Freygard'da çalışan Ocak Kanlı demir ve devre ustası. Sert, kaba ve çırak seçerken merhametten çok dayanıklılığa bakan biri olsa da, mekanik sezgisi çok güçlüdür; Kisho'nun yabancı ama işlevsel dehasını ilk fark eden yerel ustadır.
+Freygard'da çalışan Ocak Kanlı demir ve devre ustası. Sert, kaba ve çırak seçerken merhametten çok dayanıklılığa bakan biri olsa da, mekanik sezgisi çok güçlüdür; Kisho'nun yabancı ama işlevsel dehasını ilk fark eden yerel ustadır. Rünlerin teorik dilini bütünüyle okuyamasa da, işe yarayan runik grupları tanıyıp uygulayacak kadar deneyim sahibidir.
 
 ### Muhafız Yüzbaşısı Lyra
 Lord Valerius'un kervanında komutanlık yapan esmer kadın asker. Pusuda Elin'i devasa yıkımdan kurtararak ormanın içine kaçırmayı başarmış, son nefesinde kızı Kisho'ya emanet etmiştir.

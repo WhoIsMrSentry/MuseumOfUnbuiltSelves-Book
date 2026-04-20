@@ -65,7 +65,7 @@ Dış yüzeyi lifli, içi boşaltıldığında su taşımaya veya kaynatmaya uyg
 Yaşam ve ölüm arasındaki araf. Zamanın ve mekânın olmadığı, çözülmekte olan saf bilgiden oluşan sislerle kaplı bir boyut.
 - **Kozmik Gürültü**: Bu alemde duyulan, parçalanan zihinlerin ve ruhların son yankıları.
 
-### Dauðr (Tanrıların Mezarı / Ölüm)
+### Smert / Mogila bogov (Tanrıların Mezarı / Ölüm)
 Elin'in dilinde hem "Ölüm" anlamına gelir hem de gökyüzünden düşmüş, devasa makine kalıntılarından oluşan harabeler için kullanılır. Bu kalıntılar ( Tanrıların Mezarı), kanyonlara çakılmış eski uçan şehirlerin yosun kaplı enkazlarıdır.
 
 ---
@@ -87,7 +87,7 @@ Metalin, ateşin ve yaşamın kutsal bağı. Kristal gücüyle iki farklı mater
 
 ### Elin
 Kisho'nun rehberlik ettiği, bu dünyanın dilini ve temel kurallarını öğreten turuncu saçlı kız çocuğu.
-- **Sözcük Dağarcığı**: Sten (Taş), Sól (Güneş), Dauðr (Ölüm/Tehlike), Fara (Yürü/İlerle).
+- **Sözcük Dağarcığı**: Kamen (Taş), Solntse (Güneş), Smert (Ölüm/Tehlike), Idti (Yürü/İlerle), Derevo (Ağaç), Voda (Su), Kopye (Mızrak), Ogon (Ateş), Otráva/Yad (Zehir).
 
 ### Mor Pullu Balık
 Göl havzalarında yaşayan, pulları güneş ışığında morumsu bir parlaklık yayan, iri ve besleyici balık türü. Tütsülendiğinde uzun süre bozulmayan değerli bir ticaret metasına dönüşür.

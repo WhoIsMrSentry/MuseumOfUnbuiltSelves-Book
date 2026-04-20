@@ -39,6 +39,17 @@ Yapay enerji emilimi veya yoğun teknolojik aktivite sırasında çevreye yayıl
 ### Elektrik Arkı ve Ark Kaynağı
 Kristal enerjisinin bir hata noktası veya bilinçli kısa devre üzerinden mavi-beyaz plazma sıçramasına dönüşmüş hali. Uygun metal dolgu ile kullanıldığında yalnızca yıkıcı bir boşalma değil, çelik gibi sert alaşımları eritip birleştirebilen son derece hassas bir üretim tekniğine dönüşür.
 
+### Dönüşüm Kuralları
+Kristaller ham enerjiyi yoktan var etmez; aldıkları girdiyi kendi doğalarına uygun tek bir ana çıktıya dönüştürürler. Son gözlemler, her bireysel kristalin çok amaçlı bir güç kaynağı değil, **tek bir baskın dönüşüme yeminli** bir dönüştürücü olduğunu düşündürmektedir.
+- **Tek Kristal, Tek Dönüşüm**: Her kristal özünde yalnızca bir ana dönüşüm yasasına bağlıdır. Bir taş ışığı, bir başkası dönmeyi, bir diğeri biyolojik işlevi ya da ani boşalmayı destekleyebilir; ancak aynı kristal bütün bu rolleri eşit biçimde üstlenemez.
+- **Kısıtlama Gücü Keskinleştirir**: Kristalin çok yönlü olmaması, gücünün zayıflığı değil uzmanlığıdır. Taş ne kadar dar bir işleve bağlıysa, o işi o kadar verimli ve kararlı yapar.
+- **Kaynak Uyumluluğu**: Her kristal her kaynaktan aynı şekilde beslenmez. Bazıları kinetik darbeyle tetiklenir, bazıları canlılardaki mavi aurayı emer, bazıları ise güneş ışığı altında yeniden canlanır. Yanlış kaynak, etkisizlikten taşmaya kadar farklı sonuçlar doğurabilir.
+- **Kod Kimliği**: Kristalin içindeki semboller yalnızca komut değil, aynı zamanda taşın hangi dönüşüm ailesine ait olduğunun işaretidir. İç kodun renkleri, motifleri ve ritmi; taşın neyi sevdiğini, neyi reddettiğini ve hangi işe yatkın olduğunu belirler.
+- **Rünler Yolu Belirler, Doğayı Değil**: Atölyede kazınan rünler kristale yeni bir yetenek vermez; yalnızca kristalin zaten sahip olduğu dönüşümü nereye, ne zaman ve hangi yoğunlukta uygulayacağını söyler. Rünler “nasıl”, kristalin özü ise “neye” karar verir.
+- **Şarj ve Taşma Ayrımı**: Bir kristalin yeniden dolması ile aşırı yüklenmesi aynı şey değildir. Güneş altında canlanmak bir şarj biçimi olabilirken, mor faz büyük olasılıkla dolum değil taşma ve fazla enerjinin dışarı sızmasıdır.
+- **Dozaj Hayattır**: Aynı kristal tek seferde vahşi bir boşalmayla kendini öldürebilir ya da kontrollü darbelerle yüzlerce küçük işlem sürdürebilir.
+
+
 ---
 
 ## 2. Canlılar ve Ekosistem (Fauna)

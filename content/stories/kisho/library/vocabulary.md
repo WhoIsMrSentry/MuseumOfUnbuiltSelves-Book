@@ -9,18 +9,19 @@ Bu belge, Kisho'nun mühendislik gözüyle anlamlandırmaya çalıştığı yaba
 ### Biyo-İletken Kök-Devre (Kök-Devre)
 Doğal yapıların (ahşap, kemik, canlı doku) hücre dokusuna nüfuz ederek bir devre kartı gibi işleyen metalik-organik damar yapısı. Ayrıştırıldığında kendi üzerine katlanarak altıgen bir kristale dönüşür. Doğanın endüstriyel bir ağ gibi büyütüldüğü bu dünyanın temel teknolojisidir.
 
-### Mavi Çekirdek (Çekirdek / Kristal)
-Enerji depolama ve işlem birimidir. İçinde sürekli dönen, Kisho'nun "Organik Kod" olarak tanımladığı semboller barındırır.
-- **Aktif Çekirdek**: Parlak mavi ışık yayar, semboller hareketlidir.
+### Mavi Çekirdek (Çekirdek / Kristal / Jeton)
+Enerji depolama ve işlem birimidir. Dışarıdan bakıldığında cam veya buz gibi şeffaf, açık mavi renkli kusursuz bir **altıgen prizma (jeton)** şeklindedir. İç yüzeylerinde ve merkezinde sürekli dönen; siyan (açık mavi) ve sıcak kırmızı/turuncu tonlarında parlayan dairesel, geometrik ve runik semboller barındırır. Bu ışıklı hatlar, kristale antik bir mistisizmle harmanlanmış siberpunk bir teknolojik jeton görünümü verir. Üç katmandan oluşur, dış ölü kalkan katmanı ateş ve keskiyle soyularak asıl saf güce sahip öz açığa çıkarılır.
+- **Aktif Çekirdek**: Parlak mavi ışık yayar, içindeki kırmızı ve siber-mavi semboller hareketlidir.
 - **Durağan Çekirdek**: Enerjisi düşük veya tetiklenmeyi bekleyen formdur.
-- **Siyah Çekirdek (Ölü Çekirdek)**: Enerjisi tamamen boşalmış, kırılgan ve işlevsiz halidir.
+- **Siyah Çekirdek (Ölü Çekirdek)**: Enerjisi tamamen boşalmış veya dış kalkan/kabuk vazifesi gören kısmın ayrılıp kömürleşmesiyle oluşan işlevsiz halidir. (Ezilerek devreler için iletken siyah toz yapımında kullanılır).
 
-### Organik Kod (Semboller)
-Çekirdeklerin içindeki ışıklı işaret dizileri. Bir makine kodu gibi işlev görürler ve kristalin çevreyle olan etkileşimini (hareket, savunma, sindirim vb.) kontrol ederler.
-- **Temel Komutlar**: Kisho'nun zihninde yankılanan "Tutun", "Bağla", "Bütünleş" gibi kavramsal direktifler.
+### Organik Kod (Rünler / Semboller)
+Çekirdeklerin içindeki ışıklı işaret dizileri. Bir makine kodu gibi işlev görürler ve kristalin çevreyle olan etkileşimini (hareket, ışık, ateş, savurma vb.) kontrol ederler. Her sembolün (keskin hatlı açılar, spiraller vb.) farklı bir mekanik işlemi vardır.
+- **Kavramsal Direktifler**: Kisho'nun zihninde nesnelere dokunduğunda yankılanan "Tutun", "Bağla", "Bütünleş" gibi temel komutlar.
+- **Devre Rünleri**: Ocak Kanlı ustalar tarafından metalik zeminlere fiziksel olarak kazınan; kristallerin, kinetik veya ısı enerjilerini dönüştürmesi (ışığa veya devinime çevirmesi) için verilen sabit komutlardır.
 
-### Mavi Enerji (Mavi Sıvı / Aura)
-Ekosistemi besleyen temel güç kaynağı. Canlıların damarlarında 'Mavi Sıvı' (Kan) olarak dolaşır. Kristaller, bu sıvıyı emmez; içindeki saf enerjiyi (aura) ince iplikler halinde sömürür. Enerjisi emilen sıvı matlaşarak sıradanlaşır.
+### Mavi Enerji (Mavi Sıvı / Kan)
+Ekosistemi besleyen temel güç kaynağı. Canlıların damarlarında sıvı formunda dolaşır. Doğal halde kristaller içindeki aurayı emerken, sanayide ve zanaatkârlıkta ise siyah kristal tozu ile karıştırılıp devre anakartlarındaki iletken yolları ("kabloları") çizmek için kullanılan organik bir mürekkeptir.
 
 ### Ozon Kokusu
 Yapay enerji emilimi veya yoğun teknolojik aktivite sırasında çevreye yayılan keskin, karakteristik koku. Biyo-teknolojik bir "çalışma" veya "anomali" göstergesidir.
@@ -32,8 +33,8 @@ Yapay enerji emilimi veya yoğun teknolojik aktivite sırasında çevreye yayıl
 ### Slime (Asit Jölesi)
 Mavi, yarı saydam ve asidik bir bedene sahip yaratık. Merkezindeki küçük bir 'Çekirdek' sayesinde parçalandığında bile kendini yenileyebilir. Çekirdek içindeki kodlar "hareket", "beslen" ve "sindir" gibi basit işlevleri yönetir.
 
-### Zırhlı Böcek
-Kitin zırhlı, 'Karbon-Fiber' sağlamlığında dış iskelete sahip tehlikeli canlı. Kanı yüksek enerjili mavi bir sıvıdır ve öldüğünde ozon kokusu yayar.
+### Zırhlı Böcek (Kabuk-Kıran)
+Kitin zırhlı, 'Karbon-Fiber' sağlamlığında dış iskelete sahip, ormanda sürü halinde pusuya yatan tehlikeli canlı. Kuzeyliler ona "Kabuk-Kıran" (Armor-Breaker) derler. Kanı devasa enerjili mavi bir sıvıdır ve öldüğünde ozon kokusu yayar.
 
 ### Zebra Balığı
 Mavi enerjiyi kullanarak suyu adeta "yaran" ve inanılmaz hızlara ulaşabilen, enerji iletkenliği yüksek bir balık türü.
@@ -72,14 +73,20 @@ Elin'in dilinde hem "Ölüm" anlamına gelir hem de gökyüzünden düşmüş, d
 
 ## 5. Yerleşkeler ve Toplum
 
-### Freygard
-Ahşap çitlerle ve alçak taş duvarlarla çevrili, samandan çatıları ve dumanı tüten mütevazı evleri olan basit, sakin bir kasaba. Girişinde rüzgârla dönen eski bir yel değirmeni bulunur. Kisho ve Elin'in karşılaştığı ilk gerçek yerleşke.
+### Freygard Şehri ve Garnizonu
+Orijinalinde sınır bölgesine uzanan yemyeşil sakin bir taş-ahşap kasaba gibi görünse de çekirdeğinde devasa bir medeniyet ve garnizon barındırır. Girişinde gökyüzüne saplanmış devasa bir kılıç anıtı (anıtsal heykel) bulunur. Sokakları derme çatma da olsa kristal lambalarla aydınlatılır ve sürekli devriye gezen eğitimli askerler barındırır.
 
 ### Ocakkanlılar (Hearth-Blooded)
-Bu dünyanın zanaatkârları ve mühendisleridir. Biyo-teknolojiyi ve kristallerin gizemini kullanarak doğayı ve metali şekillendiren, kadim teknolojik mirasa hükmeden zümre.
+Bu dünyanın zanaatkârları ve mühendisleridir. Biyo-teknolojiyi ve kristallerin gizemini kullanarak o hurda metallere can veren zümre. (Kumandan Vorn gibi yerel liderler, Doğululardan birinin bile Ocak Kanlı olabilmesine şaşırmaktadır).
 
 ### Arna-blóð (Ocak Kanı)
-Metalin, ateşin ve yaşamın kutsal bağı. Kristal gücüyle iki farklı materyalin (örn. ahşap ve çelik) organik köklerle birbirine "moleküler düzeyde" kilitlenmesi süreci; sarsılmaz bir bütünlük yaratan kadim bağlama tekniği.
+Metalin, ateşin ve yaşamın kutsal bağı. Kristal gücüyle iki farklı materyalin organik köklerle birbirine "moleküler düzeyde" kilitlenmesi.
+
+### Kristal ve Devre Mühendisliği (Uygulamalı Ocak Kanı)
+Ocak Kanı ustalarının atölyelerde kurduğu mekanik sistemlerdir;
+1. **İletken Kan**: Mavi kan ve ezilmiş kül/siyah toz kristal ile fırça yardımıyla metalin üzerine devre yolları çizilir.
+2. **Komut Kazıması**: Hatların bağlantı noktası keski ile oyularak Rünler kazınır.
+3. **Kinetik ve Fiziksel Aktivasyon**: Güç kaynağı olacak saf kristal yuvaya (mengene yardımıyla) oturtulur ve devrenin uyanması için sisteme çekiçle şiddetli bir darbe ya da dışarıdan muazzam bir fırın ısısı verilir. Kristal bu fiziksel darbeyi ve sıcaklığı emer, mavi sıvı devresini tetikler, kinetik enerjiyi dönüş/ışık/hareket enerjisine çevirir.
 
 ---
 
@@ -87,7 +94,20 @@ Metalin, ateşin ve yaşamın kutsal bağı. Kristal gücüyle iki farklı mater
 
 ### Elin
 Kisho'nun rehberlik ettiği, bu dünyanın dilini ve temel kurallarını öğreten turuncu saçlı kız çocuğu.
-- **Sözcük Dağarcığı**: Kamen (Taş), Solntse (Güneş), Smert (Ölüm/Tehlike), Idti (Yürü/İlerle), Derevo (Ağaç), Voda (Su), Kopye (Mızrak), Ogon (Ateş), Otráva/Yad (Zehir).
+- **Sözcük Dağarcığı**: Kamen (Taş), Solntse (Güneş), Smert (Ölüm/Tehlike), Idti (Yürü/İlerle), Derevo (Ağaç), Voda (Su), Kopye (Mızrak), Ogon (Ateş), Otráva/Yad (Zehir), Gorod (Şehir), Vkusno (Lezzetli).
+- **Asıl Kimliği**: Kuzey'in en güçlü derebeyi Lord Valerius'un öz kızıdır. Pusuya düşürülmüş bir kervandan hayatta kalmıştır.
+
+### Lord Valerius
+Elin'in babası. Kuzey sınırının en güçlü askeri komutanlarından ve derebeylerindendir. İtaat ve merhamet göstermediği bilinen köklü bir aile lideridir. Çok büyük askeri birlikleri ve nüfuzu vardır.
+
+### Doğulu Savaşçılar (Kurtlar Klanı / Doğulular)
+Sıkı disiplinli, "Doğulu Dili" dedikleri ve Türkçenin neredeyse birebir aynısı olan bir dili konuşan askeri, gizemli bir ulus. Amblem olarak savaş aletlerinde şematik, özenle kazınmış bir "Kurt Mührü" kullanırlar. Kisho, kervan cesedinden aldığı bıçak yüzünden yanlışlıkla onlara mensup sayılmıştır. Eşyalarına bağlı ve ölümcül savaşçılardır.
+
+### Kumandan Vorn
+Freygard garnizon şehrinin amiri ve Lord Valerius'a bağlı rütbeli muhafız birliği komutanı. Yüzünde savaş yaraları olan, adaletli ve "Doğulu dilini" (Türkçe) pürüzsüz konuşabilen deneyimli bir adamdır.
+
+### Muhafız Yüzbaşısı Lyra
+Lord Valerius'un kervanında komutanlık yapan esmer kadın asker. Pusuda Elin'i devasa yıkımdan kurtararak ormanın içine kaçırmayı başarmış, son nefesinde kızı Kisho'ya emanet etmiştir.
 
 ### Mor Pullu Balık
 Göl havzalarında yaşayan, pulları güneş ışığında morumsu bir parlaklık yayan, iri ve besleyici balık türü. Tütsülendiğinde uzun süre bozulmayan değerli bir ticaret metasına dönüşür.

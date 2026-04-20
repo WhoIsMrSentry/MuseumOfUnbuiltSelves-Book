@@ -65,9 +65,15 @@ Dış yüzeyi lifli, içi boşaltıldığında su taşımaya veya kaynatmaya uyg
 Yaşam ve ölüm arasındaki araf. Zamanın ve mekânın olmadığı, çözülmekte olan saf bilgiden oluşan sislerle kaplı bir boyut.
 - **Kozmik Gürültü**: Bu alemde duyulan, parçalanan zihinlerin ve ruhların son yankıları.
 
+### Dauðr (Tanrıların Mezarı / Ölüm)
+Elin'in dilinde hem "Ölüm" anlamına gelir hem de gökyüzünden düşmüş, devasa makine kalıntılarından oluşan harabeler için kullanılır. Bu kalıntılar ( Tanrıların Mezarı), kanyonlara çakılmış eski uçan şehirlerin yosun kaplı enkazlarıdır.
+
 ---
 
-## 5. Sosyal ve Tarihi Yapılar
+## 5. Yerleşkeler ve Toplum
+
+### Freygard
+Ahşap çitlerle ve alçak taş duvarlarla çevrili, samandan çatıları ve dumanı tüten mütevazı evleri olan basit, sakin bir kasaba. Girişinde rüzgârla dönen eski bir yel değirmeni bulunur. Kisho ve Elin'in karşılaştığı ilk gerçek yerleşke.
 
 ### Ocakkanlılar (Hearth-Blooded)
 Bu dünyanın zanaatkârları ve mühendisleridir. Biyo-teknolojiyi ve kristallerin gizemini kullanarak doğayı ve metali şekillendiren, kadim teknolojik mirasa hükmeden zümre.
@@ -75,19 +81,22 @@ Bu dünyanın zanaatkârları ve mühendisleridir. Biyo-teknolojiyi ve kristalle
 ### Arna-blóð (Ocak Kanı)
 Metalin, ateşin ve yaşamın kutsal bağı. Kristal gücüyle iki farklı materyalin (örn. ahşap ve çelik) organik köklerle birbirine "moleküler düzeyde" kilitlenmesi süreci; sarsılmaz bir bütünlük yaratan kadim bağlama tekniği.
 
-### Dauðr (Tanrıların Mezarı / Ölüm)
-Elin'in dilinde hem "Ölüm" anlamına gelir hem de gökyüzünden düşmüş, devasa makine kalıntılarından oluşan harabeler için kullanılır. Bu kalıntılar ( Tanrıların Mezarı), kanyonlara çakılmış eski uçan şehirlerin yosun kaplı enkazlarıdır.
-
 ---
 
 ## 6. Önemli Varlıklar ve Kavramlar
 
 ### Elin
 Kisho'nun rehberlik ettiği, bu dünyanın dilini ve temel kurallarını öğreten turuncu saçlı kız çocuğu.
-- **Sözcük Dağarcığı**: Sten (Taş), Sól (Güneş), Dauðr (Ölüm/Tehlike).
+- **Sözcük Dağarcığı**: Sten (Taş), Sól (Güneş), Dauðr (Ölüm/Tehlike), Fara (Yürü/İlerle).
+
+### Mor Pullu Balık
+Göl havzalarında yaşayan, pulları güneş ışığında morumsu bir parlaklık yayan, iri ve besleyici balık türü. Tütsülendiğinde uzun süre bozulmayan değerli bir ticaret metasına dönüşür.
 
 ### Canlı Mızrak
 Kisho'nun Arna-blóð sürecini taklit ederek çelik bıçak ile ahşap sopayı bir kristal yardımıyla moleküler düzeyde kaynaştırdığı ilk özgün icadı.
+
+### Tütsüleme ve Sermaye Felsefesi
+Dumanın içinde bulunan fenoller ve aldehitler yardımıyla hücre duvarlarını mühürleyip yiyeceklere antimikrobiyal ve antioksidan özellikler katar. Etin dış formik lezzetini, aromalı ve korunaklı bir ticaret malına dönüştürür.
 
 ### Slime (Asit Jölesi)
 Merkezindeki Mavi Çekirdek sayesinde kendini sınırsızca yenileyebilen, asidik ve yarı saydam saldırgan canlılar.

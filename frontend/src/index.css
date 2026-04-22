@@ -47,9 +47,10 @@ html[data-theme='amoled'] {
 }
 
 html[data-font='serif'] { --font: Georgia, 'Times New Roman', Times, serif; }
-/* MARK: - Comic Neue Bold (700) is self-hosted via @fontsource (see main.tsx).
-   Default weight is bold for the playful look. */
-html[data-font='comic'] { --font: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', cursive; font-weight: 700; }
+/* MARK: - Atkinson Hyperlegible (Braille Institute, OFL) is self-hosted via
+   @fontsource (see main.tsx). Designed for maximum character distinction —
+   the most popular open-source dyslexia-friendly book font. */
+html[data-font='fancy'] { --font: 'Atkinson Hyperlegible', system-ui, sans-serif; }
 
 /* MARK: - Reader font scale (applied to .prose-mystory) */
 :root { --reader-scale: 1.15; }

@@ -3,7 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 // MARK: - Types
 export type ThemeType = 'obsidian' | 'amoled';
-export type FontType = 'default' | 'serif' | 'comic';
+export type FontType = 'default' | 'serif' | 'fancy';
 export type FontSizeType = 'sm' | 'md' | 'lg' | 'xl';
 
 export interface SettingsState {
@@ -16,7 +16,7 @@ interface SettingsStore extends SettingsState {
   update: (patch: Partial<SettingsState>) => void;
 }
 
-const DEFAULTS: SettingsState = { theme: 'obsidian', font: 'comic', fontSize: 'lg' };
+const DEFAULTS: SettingsState = { theme: 'obsidian', font: 'default', fontSize: 'lg' };
 
 // MARK: - DOM mapping (key -> attribute, optional default value to omit)
 const DOM_MAP: { [K in keyof SettingsState]: { attr: string; defaultValue?: SettingsState[K] } } = {
@@ -48,10 +48,10 @@ export const useSettingsStore = create<SettingsStore>()(
     }),
     {
       name: 'mystory_user_settings',
-      version: 2,
+      version: 5,
       storage: createJSONStorage(() => localStorage),
       partialize: (s) => ({ theme: s.theme, font: s.font, fontSize: s.fontSize }),
-      migrate: () => DEFAULTS, // v1 -> v2: reset to new defaults (playful + large)
+      migrate: () => DEFAULTS, // bumped to v5: Sans (Inter) default + Serif + Fancy (Atkinson)
       onRehydrateStorage: () => (state) => { if (state) applySettingsToDOM(state); },
     },
   ),
@@ -75,7 +75,7 @@ export const SETTING_GROUPS: {
     options: [
       { value: 'default', label: 'Sans' },
       { value: 'serif',   label: 'Serif' },
-      { value: 'comic',   label: 'Playful' },
+      { value: 'fancy',   label: 'Easy read' },
     ],
   },
   fontSize: {

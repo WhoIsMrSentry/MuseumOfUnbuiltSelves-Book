@@ -1,107 +1,120 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookMarked, Layers, ChevronRight } from 'lucide-react';
-import { getAllBooks, enrichBookMeta } from '@/utils/markdown';
-import { getProgress } from '@/store/progress';
-import type { Book } from '@/utils/markdown';
+import { motion } from 'framer-motion';
+import { BookMarked, ChevronRight } from 'lucide-react';
+import { enrichBookMeta, getAllBooks, type Book } from '@/utils/markdown';
+import { useProgressStore } from '@/store/progress';
 
-// MARK: - Library Page (Landing)
+// MARK: - Library
 export default function Library() {
-  // getAllBooks() is synchronous — zero fetches, instant render
   const [books, setBooks] = useState<Book[]>(() => getAllBooks());
+  const progressMap = useProgressStore((s) => s.map);
 
-  // Enrich each book with first-page metadata lazily
   useEffect(() => {
-    Promise.all(books.map((b) => enrichBookMeta(b))).then(setBooks);
+    Promise.all(books.map(enrichBookMeta)).then(setBooks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="min-h-screen px-6 py-12 sm:px-8 sm:py-16 max-w-5xl mx-auto w-full bg-[var(--bg-color)] text-[var(--text-color)]">
-      {/* MARK: - Header */}
-      <header className="mb-12 sm:mb-16">
-        <motion.h1
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-color)]"
-        >
-          Library
-        </motion.h1>
-        <p className="mt-2 text-sm text-[var(--muted-color)]">My published stories.</p>
-      </header>
+    <div className="min-h-svh bg-[var(--bg)] text-[var(--text)]">
+      <div className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8 sm:py-16">
+        <Header />
+        {books.length === 0
+          ? <Empty />
+          : (
+            <main className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+              {books.map((b, i) => (
+                <BookCard key={b.bookSlug} book={b} index={i} savedSlug={progressMap[b.bookSlug]} />
+              ))}
+            </main>
+          )}
+        <footer className="mt-20 text-center text-xs text-[var(--muted)] opacity-60">
+          MyStory &copy; {new Date().getFullYear()}
+        </footer>
+      </div>
+    </div>
+  );
+}
 
-      {/* MARK: - Book Grid */}
-      <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {books.length === 0 ? (
-          <div className="col-span-full py-16 text-center text-[var(--muted-color)] rounded-2xl border border-dashed border-white/8 bg-white/3 flex flex-col items-center gap-3">
-            <BookMarked size={40} className="opacity-40" />
-            <p className="text-sm">No books yet.</p>
-          </div>
-        ) : (
-          books.map((book, idx) => <BookCard key={book.bookSlug} book={book} index={idx} />)
-        )}
-      </main>
+// MARK: - Header
+function Header() {
+  return (
+    <header className="mb-10 sm:mb-14">
+      <motion.h1
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-3xl font-bold tracking-tight sm:text-4xl"
+      >
+        Library
+      </motion.h1>
+      <p className="mt-2 text-sm text-[var(--muted)]">My published stories.</p>
+    </header>
+  );
+}
 
-      {/* MARK: - Footer */}
-      <footer className="mt-20 text-center text-xs text-[var(--muted-color)] opacity-50">
-        MyStory &copy; {new Date().getFullYear()}
-      </footer>
+// MARK: - Empty State
+function Empty() {
+  return (
+    <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] py-16 text-center text-[var(--muted)]">
+      <BookMarked size={36} className="opacity-40" />
+      <p className="text-sm">No books yet.</p>
     </div>
   );
 }
 
 // MARK: - Book Card
-function BookCard({ book, index }: { book: Book; index: number }) {
-  const savedSlug = getProgress(book.bookSlug);
-  const targetSlug = savedSlug || book.pages[0]?.pageSlug || '';
-  const hasProgress = !!savedSlug;
-
-  const savedIndex = hasProgress ? book.pages.findIndex((p) => p.pageSlug === savedSlug) : -1;
-  const pct = hasProgress && savedIndex !== -1
-    ? Math.round(((savedIndex + 1) / book.pages.length) * 100)
-    : 0;
+function BookCard({ book, index, savedSlug }: { book: Book; index: number; savedSlug?: string }) {
+  const target = savedSlug || book.pages[0]?.pageSlug || '';
+  const savedIdx = savedSlug ? book.pages.findIndex((p) => p.pageSlug === savedSlug) : -1;
+  const hasProgress = savedIdx >= 0;
+  const pct = hasProgress ? Math.round(((savedIdx + 1) / book.pages.length) * 100) : 0;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06 }}
+      transition={{ delay: index * 0.05 }}
     >
       <Link
-        to={`/reader/${book.bookSlug}/${targetSlug}`}
-        className="group flex flex-col h-full rounded-2xl border border-white/8 bg-white/3 overflow-hidden no-underline transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/5 hover:border-white/16 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+        to={`/reader/${book.bookSlug}/${target}`}
+        className="surface group flex h-full flex-col overflow-hidden no-underline transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.05] hover:shadow-2xl"
       >
         {book.cover && (
           <div className="relative aspect-[16/10] overflow-hidden border-b border-white/5">
-            <img src={book.cover} alt={book.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+            <img
+              src={book.cover}
+              alt={book.title}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           </div>
         )}
 
-        <div className="flex flex-col flex-1 p-6">
-          <h2 className="text-xl font-semibold text-[var(--text-color)] leading-snug mb-3 group-hover:text-[var(--accent-color)] transition-colors">
+        <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
+          <h2 className="text-lg font-semibold leading-snug tracking-tight transition-colors group-hover:text-[var(--accent)] sm:text-xl">
             {book.title}
           </h2>
-          <p className="text-sm text-[var(--muted-color)] leading-relaxed line-clamp-3 mb-auto">
+          <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
             {book.description}
           </p>
 
-          <div className="mt-6 pt-4 border-t border-white/5 flex justify-between items-end">
+          <div className="mt-2 flex items-end justify-between border-t border-white/5 pt-4">
             <div className="flex flex-col gap-1.5">
-              <span className="flex items-center gap-1.5 text-xs text-[var(--muted-color)]">
-                <Layers size={12} />
-                {hasProgress && savedIndex !== -1
-                  ? `${savedIndex + 1} / ${book.pages.length}`
-                  : `${book.pages.length} pages`}
+              <span className="text-xs text-[var(--muted)]">
+                {hasProgress ? `${savedIdx + 1} / ${book.pages.length}` : `${book.pages.length} chapters`}
               </span>
-              {hasProgress && savedIndex !== -1 && (
-                <div className="h-1 w-20 rounded-full bg-white/8 overflow-hidden">
-                  <div className="h-full rounded-full bg-[var(--accent-color)] transition-all duration-500" style={{ width: `${pct}%` }} />
+              {hasProgress && (
+                <div className="h-1 w-20 overflow-hidden rounded-full bg-white/10">
+                  <div
+                    className="h-full rounded-full bg-[var(--accent)] transition-[width] duration-500"
+                    style={{ width: `${pct}%` }}
+                  />
                 </div>
               )}
             </div>
-            <span className="flex items-center gap-1 text-xs font-medium text-[var(--accent-color)] transition-transform group-hover:translate-x-0.5">
-              {hasProgress && savedIndex !== -1 ? 'Continue' : 'Read'} <ChevronRight size={14} />
+            <span className="flex items-center gap-1 text-xs font-medium text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
+              {hasProgress ? 'Continue' : 'Read'} <ChevronRight size={14} />
             </span>
           </div>
         </div>

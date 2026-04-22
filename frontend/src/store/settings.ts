@@ -1,70 +1,90 @@
-import { useState, useEffect } from 'react';
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-// MARK: - Settings Types & Constants
+// MARK: - Types
 export type ThemeType = 'obsidian' | 'amoled';
 export type FontType = 'default' | 'serif' | 'comic';
+export type FontSizeType = 'sm' | 'md' | 'lg' | 'xl';
 
 export interface SettingsState {
   theme: ThemeType;
   font: FontType;
+  fontSize: FontSizeType;
 }
 
-const SETTINGS_KEY = 'mystory_user_settings';
+interface SettingsStore extends SettingsState {
+  update: (patch: Partial<SettingsState>) => void;
+}
 
-const DEFAULT_SETTINGS: SettingsState = {
-  theme: 'obsidian',
-  font: 'default',
+const DEFAULTS: SettingsState = { theme: 'obsidian', font: 'comic', fontSize: 'lg' };
+
+// MARK: - DOM mapping (key -> attribute, optional default value to omit)
+const DOM_MAP: { [K in keyof SettingsState]: { attr: string; defaultValue?: SettingsState[K] } } = {
+  theme:    { attr: 'data-theme',     defaultValue: 'obsidian' },
+  font:     { attr: 'data-font' },
+  fontSize: { attr: 'data-font-size' },
 };
 
-// MARK: - LocalStorage Helpers
-export function getSettings(): SettingsState {
-  try {
-    const data = localStorage.getItem(SETTINGS_KEY);
-    if (!data) return DEFAULT_SETTINGS;
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(data) };
-  } catch (error) {
-    console.error('Failed to parse settings registry', error);
-    return DEFAULT_SETTINGS;
-  }
-}
-
-export function saveSettings(settings: Partial<SettingsState>): SettingsState {
-  const current = getSettings();
-  const next = { ...current, ...settings };
-  localStorage.setItem(SETTINGS_KEY, JSON.stringify(next));
-  applySettingsToDOM(next);
-  return next;
-}
-
-export function applySettingsToDOM(settings?: SettingsState) {
-  const s = settings || getSettings();
+export function applySettingsToDOM(s: SettingsState) {
   const html = document.documentElement;
-
-  if (s.theme === 'amoled') {
-    html.setAttribute('data-theme', 'amoled');
-  } else {
-    html.removeAttribute('data-theme');
-  }
-
-  if (s.font !== 'default') {
-    html.setAttribute('data-font', s.font);
-  } else {
-    html.removeAttribute('data-font');
-  }
+  (Object.keys(DOM_MAP) as (keyof SettingsState)[]).forEach((k) => {
+    const { attr, defaultValue } = DOM_MAP[k];
+    const value = s[k];
+    if (defaultValue !== undefined && value === defaultValue) html.removeAttribute(attr);
+    else html.setAttribute(attr, value);
+  });
 }
 
-// MARK: - React Hook
-export function useSettings() {
-  const [settings, setSettingsState] = useState<SettingsState>(getSettings());
+// MARK: - Store (persisted, cross-tab synced)
+export const useSettingsStore = create<SettingsStore>()(
+  persist(
+    (set) => ({
+      ...DEFAULTS,
+      update: (patch) => set((s) => {
+        const next = { ...s, ...patch };
+        applySettingsToDOM(next);
+        return next;
+      }),
+    }),
+    {
+      name: 'mystory_user_settings',
+      version: 2,
+      storage: createJSONStorage(() => localStorage),
+      partialize: (s) => ({ theme: s.theme, font: s.font, fontSize: s.fontSize }),
+      migrate: () => DEFAULTS, // v1 -> v2: reset to new defaults (playful + large)
+      onRehydrateStorage: () => (state) => { if (state) applySettingsToDOM(state); },
+    },
+  ),
+);
 
-  useEffect(() => {
-    applySettingsToDOM(settings);
-  }, [settings]);
+// MARK: - UI groups (single source of truth)
+type Choice<T extends string> = { value: T; label: string };
 
-  const updateSettings = (updates: Partial<SettingsState>) => {
-    const next = saveSettings(updates);
-    setSettingsState(next);
-  };
-
-  return { settings, updateSettings };
-}
+export const SETTING_GROUPS: {
+  [K in keyof SettingsState]: { label: string; options: Choice<SettingsState[K]>[] };
+} = {
+  theme: {
+    label: 'Theme',
+    options: [
+      { value: 'obsidian', label: 'Soft dark' },
+      { value: 'amoled',   label: 'Deep black' },
+    ],
+  },
+  font: {
+    label: 'Font',
+    options: [
+      { value: 'default', label: 'Sans' },
+      { value: 'serif',   label: 'Serif' },
+      { value: 'comic',   label: 'Playful' },
+    ],
+  },
+  fontSize: {
+    label: 'Text size',
+    options: [
+      { value: 'sm', label: 'Small' },
+      { value: 'md', label: 'Medium' },
+      { value: 'lg', label: 'Large' },
+      { value: 'xl', label: 'XL' },
+    ],
+  },
+};

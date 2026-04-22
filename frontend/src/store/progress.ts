@@ -1,53 +1,32 @@
-// MARK: - LocalStorage Progress Store
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-const PROGRESS_KEY = 'mystory_reading_progress';
-
-/**
- * Returns the entire hashmap of locally saved book progresses.
- */
-function getRegistry(): Record<string, string> {
-  try {
-    const data = localStorage.getItem(PROGRESS_KEY);
-    return data ? JSON.parse(data) : {};
-  } catch (error) {
-    console.error('Failed to parse progress registry', error);
-    return {};
-  }
+// MARK: - Reading progress map: { bookSlug -> last pageSlug }
+interface ProgressStore {
+  map: Record<string, string>;
+  set: (bookSlug: string, pageSlug: string) => void;
+  clear: (bookSlug: string) => void;
 }
 
-/**
- * Commits the registry to local storage.
- */
-function saveRegistry(registry: Record<string, string>) {
-  try {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(registry));
-  } catch (error) {
-    console.error('Failed to save progress registry', error);
-  }
-}
+export const useProgressStore = create<ProgressStore>()(
+  persist(
+    (set) => ({
+      map: {},
+      set: (bookSlug, pageSlug) => set((s) => ({ map: { ...s.map, [bookSlug]: pageSlug } })),
+      clear: (bookSlug) => set((s) => {
+        const next = { ...s.map };
+        delete next[bookSlug];
+        return { map: next };
+      }),
+    }),
+    {
+      name: 'mystory_reading_progress',
+      storage: createJSONStorage(() => localStorage),
+      partialize: (s) => ({ map: s.map }),
+    },
+  ),
+);
 
-/**
- * Saves the current page slug for a specific book.
- */
-export function setProgress(bookSlug: string, pageSlug: string) {
-  const registry = getRegistry();
-  registry[bookSlug] = pageSlug;
-  saveRegistry(registry);
-}
-
-/**
- * Retrieves the last read page slug for a specific book. Returns null if not started.
- */
-export function getProgress(bookSlug: string): string | null {
-  const registry = getRegistry();
-  return registry[bookSlug] || null;
-}
-
-/**
- * Removes the progress for a specific book (usually when finished).
- */
-export function clearProgress(bookSlug: string) {
-  const registry = getRegistry();
-  delete registry[bookSlug];
-  saveRegistry(registry);
-}
+// MARK: - Non-reactive accessor (for utilities/effects that don't need subscription)
+export const getProgress = (bookSlug: string): string | null =>
+  useProgressStore.getState().map[bookSlug] || null;

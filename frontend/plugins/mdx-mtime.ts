@@ -20,7 +20,7 @@ function collectMtimes(storiesDir: string): Record<string, string> {
     for (const file of readdirSync(bookPath, { withFileTypes: true })) {
       if (!file.isFile()) continue;
       const ext = extname(file.name);
-      if (ext !== '.md' && ext !== '.mdx') continue;
+      if (ext !== '.mdx') continue;
 
       const pageSlug = basename(file.name, ext);
       const key = `${bookDir.name}/${pageSlug}`;
@@ -44,7 +44,7 @@ export default function mdxMtimePlugin(storiesDir: string): Plugin {
     },
     // MARK: - HMR: re-scan on mdx file changes
     handleHotUpdate({ file, server }) {
-      if (file.endsWith('.mdx') || file.endsWith('.md')) {
+      if (file.endsWith('.mdx')) {
         const mod = server.moduleGraph.getModuleById(RESOLVED_ID);
         if (mod) server.moduleGraph.invalidateModule(mod);
       }

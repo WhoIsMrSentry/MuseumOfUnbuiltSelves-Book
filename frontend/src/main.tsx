@@ -1,10 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { applySettingsToDOM } from '@/store/settings'
+import { applySettingsToDOM, useSettingsStore } from '@/store/settings'
 import '@/index.css'
 import App from '@/App.tsx'
 
-applySettingsToDOM();
+// MARK: - Apply persisted settings to DOM at startup
+applySettingsToDOM(useSettingsStore.getState());
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

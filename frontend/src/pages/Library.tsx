@@ -4,11 +4,21 @@ import { BookMarked, ChevronRight } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
 import { enrichBookMeta, getAllBooks, type Book } from '@/utils/markdown';
 import { useProgressStore } from '@/store/progress';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 // MARK: - Library
 export default function Library() {
   const [books, setBooks] = useState<Book[]>(() => getAllBooks());
   const progressMap = useProgressStore((s) => s.map);
+
+  useDocumentMeta({
+    title: 'Kisho ve Diğer Hikayeler — MyStory by hamzayslmn',
+    description:
+      "hamzayslmn tarafından yazılan özgün hikayeler. Kisho: 2053 Anakara'da başlayan, kristal manaya dayanan distopik fantastik bir roman serisi.",
+    path: '/',
+    type: 'website',
+    keywords: ['kisho', 'fantasy', 'story', 'hamzayslmn', 'fantastik hikaye', 'distopya', 'türkçe roman', 'mystory'],
+  });
 
   useEffect(() => {
     Promise.all(books.map(enrichBookMeta)).then(setBooks);

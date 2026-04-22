@@ -1,15 +1,91 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mystory Archives</title>
+    <link rel="icon" type="image/svg+xml" href="/mystory/favicon.svg" />
+
+    <!-- Primary SEO -->
+    <title>Kisho — Distopik Fantastik Hikaye | MyStory by hamzayslmn</title>
+    <meta name="description" content="Kisho: 2053 Anakara'da başlayan, kristal manaya ve mühendis aklına dayanan distopik fantastik bir hikaye. hamzayslmn tarafından yazılan özgün bir roman." />
+    <meta name="keywords" content="kisho, kisho hikaye, kisho roman, kisho fantasy, kisho story, fantastik hikaye, distopik fantezi, türkçe fantastik roman, hamzayslmn, hamza yslmn, mystory, kristal mana, ocak kanlı, anakara 2053, online roman oku, ücretsiz fantastik kitap" />
+    <meta name="author" content="hamzayslmn" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://hamzayslmn.github.io/mystory/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="book" />
+    <meta property="og:site_name" content="MyStory by hamzayslmn" />
+    <meta property="og:title" content="Kisho — Distopik Fantastik Hikaye" />
+    <meta property="og:description" content="Kristal mana, mühendis bir kahraman ve yeni bir dünya. hamzayslmn tarafından yazılan özgün fantastik roman serisi." />
+    <meta property="og:url" content="https://hamzayslmn.github.io/mystory/" />
+    <meta property="og:image" content="https://hamzayslmn.github.io/mystory/favicon.svg" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="book:author" content="hamzayslmn" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kisho — Distopik Fantastik Hikaye" />
+    <meta name="twitter:description" content="Kristal mana, mühendis bir kahraman ve yeni bir dünya. hamzayslmn tarafından yazılan özgün fantastik roman." />
+    <meta name="twitter:image" content="https://hamzayslmn.github.io/mystory/favicon.svg" />
+    <meta name="twitter:creator" content="@hamzayslmn" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Structured data: the site as a CreativeWork collection + Kisho as a Book -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://hamzayslmn.github.io/mystory/#website",
+          "url": "https://hamzayslmn.github.io/mystory/",
+          "name": "MyStory by hamzayslmn",
+          "description": "hamzayslmn tarafından yazılan özgün hikayelerin yayın arşivi.",
+          "inLanguage": "tr-TR",
+          "author": {
+            "@type": "Person",
+            "name": "hamzayslmn",
+            "url": "https://github.com/hamzayslmn",
+            "sameAs": ["https://github.com/hamzayslmn"]
+          }
+        },
+        {
+          "@type": "Book",
+          "@id": "https://hamzayslmn.github.io/mystory/reader/kisho/chapter1#book",
+          "name": "Kisho",
+          "alternateName": ["Kisho Hikayesi", "Kisho Romanı"],
+          "bookFormat": "https://schema.org/EBook",
+          "inLanguage": "tr-TR",
+          "genre": ["Fantasy", "Dystopia", "Science Fantasy", "Fantastik", "Distopya"],
+          "keywords": "kisho, fantasy, story, hamzayslmn, distopya, kristal mana, fantastik roman",
+          "description": "Kisho: 2053 Anakara'da başlayan, kristal manaya ve mühendis aklına dayanan distopik fantastik bir hikaye serisi.",
+          "url": "https://hamzayslmn.github.io/mystory/reader/kisho/chapter1",
+          "author": {
+            "@type": "Person",
+            "name": "hamzayslmn",
+            "url": "https://github.com/hamzayslmn"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "MyStory",
+            "url": "https://hamzayslmn.github.io/mystory/"
+          }
+        }
+      ]
+    }
+    </script>
+
     <script type="text/javascript">
       // Start of SPA redirection script
       (function(l) {
         if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
+          var decoded = l.search.slice(1).split('&').map(function(s) {
             return s.replace(/~and~/g, '&')
           }).join('?');
           window.history.replaceState(null, null,
@@ -20,6 +96,11 @@
     </script>
   </head>
   <body>
+    <noscript>
+      <h1>Kisho — Distopik Fantastik Hikaye</h1>
+      <p>hamzayslmn tarafından yazılan özgün fantastik roman serisi. Bu site MyStory arşivinin parçasıdır. Kisho hikayesini ve diğer kitapları okumak için tarayıcınızda JavaScript'i etkinleştirin.</p>
+      <p><a href="https://github.com/hamzayslmn">hamzayslmn — GitHub</a></p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

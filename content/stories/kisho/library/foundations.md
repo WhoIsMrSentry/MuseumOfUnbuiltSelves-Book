@@ -35,39 +35,68 @@ aktarımı yapabilir, fakat bunu nasıl kullanacağını henüz bilmez.
 ## Güç Sistemi
 
 ### Mavi Çekirdek
-Çekirdekler açık mavi tonlu, kusursuz altıgen prizma benzeri kristal yapılardır.
-İçlerinde dönen runik ve geometrik ışık hatları bulunur; aktifken bu ışık belirgin
-biçimde canlanır.
+Çekirdeklerin yaygın formları açık mavi tonlu, kusursuz altıgen prizma benzeri
+kristal yapılardır. İçlerinde dönen runik ve geometrik ışık hatları bulunur;
+aktifken bu ışık belirgin biçimde canlanır.
 
 ### Çekirdek durumları
 Aktif çekirdek parlak ve hareketlidir. Zayıf çekirdek sönükleşir ve iç hareketi
 yavaşlar. Siyah çekirdek ya da ölü çekirdek ise enerjisini kaybetmiş, işlevsiz hale
 gelmiş formdur.
 
+### Taş nadirlikleri
+Kristaller dört nadirlik grubuna ayrılır: common, rare, epic ve legendary. Bu ayrım
+yalnızca piyasa değeriyle değil; boyut, mana kapasitesi, renk ve verim farkıyla da
+kendini gösterir.
+
+#### Common taşlar
+Common taşlar küçük ve basit işler içindir. Küçük bir Dönüştürücü taş el feneri kadar
+ışık üretebilir ya da bir mum alevi çıkarabilir. Slime'lardan düşen küçük taşlar bu
+sınıfın tipik örneğidir.
+
+#### Rare taşlar
+Rare taşlar, common taşların bir büyüğü gibidir. Temel farkları daha fazla mana
+kapasitesi taşımalarıdır; aynı işi daha uzun sürdürebilir ya da biraz daha yüksek
+çıktı verebilirler.
+
+#### Epic kristaller
+Epic kristaller daha kalın yapılıdır ve renkleri mora kayar. Daha fazla mana
+tutabilirler; bu yüzden daha ağır düzeneklerde ve daha talepkar işlerde kullanılırlar.
+
+### Legendary kristaller
+Legendary kristaller genellikle kralların, hanedanların ve büyük güç odaklarının
+elinde bulunur. Büyük mana kapasitelerinin yanında aynı işi daha az mana ile
+yapabildikleri için verim bakımından da üst sınıftırlar.
+
 ### Kristal aileleri
 Kristaller beş ana aileye ayrılır: Güçlendirici, Dönüştürücü, Ruh Bağlayıcı,
 Manipülasyon ve Özel. Bir kristalin ailesi içindeki rünlerden ve verdiği tepkiden
 anlaşılır.
 
-### Güçlendirici
+#### Güçlendirici
 Güçlendirici kristal, bağlandığı nesnenin ya da kullanıldığı sürecin var olan bir
 özelliğini katlar. Hız, sertlik ya da dayanım gibi mevcut nitelikleri büyütür.
+Kırmızı rünik çizgilerle tanınır.
 
-### Dönüştürücü
+#### Dönüştürücü
 Dönüştürücü kristal bir enerji ya da özelliği başka bir türe çevirir. Mana-elektrik,
 ışık-mana ya da su-buhar gibi dönüşümler bu aileye girer.
+Mor rünleriyle tanınır.
 
-### Ruh Bağlayıcı
+#### Ruh Bağlayıcı/Yaratıcı (Conjuration)
 Ruh Bağlayıcı kristal hasarlı ya da eksik parçayı telafi eder. Uygun ham madde varsa
 onu örer; yoksa kendi enerjisinden geçici bir karşılık üretir.
+Yeşil rünlerle tanınır.
 
-### Manipülasyon
+#### Manipülasyon
 Manipülasyon kristali nesnelere ve çevredeki maddeye komut verir. Komut karmaşıklaştıkça
 mana maliyeti yükselir; basit ve tekrar eden işler daha sürdürülebilirdir.
+Sarı rünlerle tanınır.
 
-### Özel kristaller
+#### Özel kristaller
 Özel ya da efsanevi kristaller sabit bir aileye tam oturmaz. Çok nadirdirler ve birden
 fazla davranış gösterebilirler.
+Belli bir renkleri yoktur; genellikle çok renkli olurlar.
 
 ### Mavi sıvı
 Büyülü canlıların damarlarında dolaşan mana yüklü biyolojik iletkendir. Kristal

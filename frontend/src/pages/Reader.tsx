@@ -12,6 +12,7 @@ import SettingsSheet from '@/pages/reader/SettingsSheet';
 import NewChapterButton from '@/pages/reader/NewChapterButton';
 import { useMountTransition } from '@/pages/reader/useMountTransition';
 import { useEditingStore } from '@/store/editing';
+import { useDocumentMeta } from '@/hooks/useDocumentMeta';
 
 const TOOLBAR_HIDE_MS = 3500;
 
@@ -19,6 +20,21 @@ export default function Reader() {
   const { bookSlug, pageSlug } = useParams<{ bookSlug: string; pageSlug: string }>();
   const r = useReader(bookSlug, pageSlug);
   const editing = useEditingStore((s) => s.editing);
+
+  const bookName = r.book?.title ?? bookSlug ?? '';
+  const chapterTitle = r.page?.metadata.title ?? r.entry?.metadata.title ?? '';
+  const chapterDesc = r.page?.metadata.description
+    || (r.page ? r.page.content.replace(/\s+/g, ' ').slice(0, 160) : '')
+    || `${bookName} — hamzayslmn tarafından yazılan özgün fantastik hikaye.`;
+
+  useDocumentMeta({
+    title: chapterTitle ? `${chapterTitle} — ${bookName} | hamzayslmn` : `${bookName} | MyStory`,
+    description: chapterDesc,
+    path: `/reader/${bookSlug}/${pageSlug}`,
+    image: r.page?.metadata.cover,
+    type: 'article',
+    keywords: [bookSlug ?? '', 'kisho', 'fantasy', 'story', 'hamzayslmn', 'fantastik hikaye', 'türkçe roman'],
+  });
 
   const [toolbar, setToolbar] = useState(true);
   const [showSettings, setShowSettings] = useState(false);

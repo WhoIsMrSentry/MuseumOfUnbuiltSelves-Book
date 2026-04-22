@@ -16,6 +16,7 @@ export interface PageEntry {
 }
 export interface Page extends PageEntry {
   content: string;
+  raw: string;
 }
 export interface Book {
   bookSlug: string;
@@ -163,5 +164,52 @@ export async function getPageContent(bookSlug: string, pageSlug: string): Promis
       lastModified: getMtime(bookSlug, pageSlug),
     },
     content: (body ? body[1] : raw).trim(),
+    raw,
   };
+}
+
+// MARK: - Dev-only: save raw MDX back to disk via Vite middleware
+export async function savePageRaw(bookSlug: string, pageSlug: string, content: string): Promise<void> {
+  if (!import.meta.env.DEV) throw new Error('Editing is only allowed in dev');
+  const res = await fetch(`/__save-mdx`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ bookSlug, pageSlug, content }),
+  });
+  if (!res.ok) throw new Error(`Save failed: ${res.status} ${await res.text()}`);
+}
+
+// MARK: - Dev-only: compute the next chapter slug based on the current one.
+// Finds the LAST number in the slug, increments it, preserves padding and the
+// surrounding text. Examples:
+//   "chapter18"  -> "chapter19"
+//   "01-foo"     -> "02-foo"
+//   "foo-03-bar" -> "foo-04-bar"
+//   "intro"      -> "intro-2"
+export function nextChapterSlug(book: Book, currentPageSlug: string): string {
+  const m = currentPageSlug.match(/^(.*?)(\d+)(\D*)$/);
+  if (m) {
+    const [, head, num, tail] = m;
+    const next = (parseInt(num, 10) + 1).toString().padStart(num.length, '0');
+    return `${head}${next}${tail}`;
+  }
+  if (currentPageSlug) return `${currentPageSlug}-2`;
+  const n = (book.pages.length + 1).toString().padStart(2, '0');
+  return `${n}-new-chapter`;
+}
+
+// MARK: - Dev-only: create a new chapter file with a starter template.
+// The template includes a cover field pointing at /assets/chapter-NN.png
+// using the chapter number found in the new slug. The user can drop the
+// image in later — the template is unaffected if the file is missing.
+export async function createNextChapter(book: Book, currentPageSlug: string): Promise<string> {
+  const slug = nextChapterSlug(book, currentPageSlug);
+  const numMatch = slug.match(/(\d+)/);
+  const coverLine = numMatch ? `cover: "/assets/chapter-${numMatch[1]}.png"\n` : '';
+  const template =
+    `---\ntitle: "New Chapter"\ndescription: ""\n${coverLine}---\n\nWrite here...\n`;
+  await savePageRaw(book.bookSlug, slug, template);
+  // Invalidate the in-memory index so subsequent reads pick up the new page.
+  _indexCache = null;
+  return slug;
 }

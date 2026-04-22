@@ -98,6 +98,22 @@ button, a { touch-action: manipulation; }
   border-radius: 0 8px 8px 0;
   padding: 0.5em 1.5em;
 }
+
+/* MARK: - Custom thick blinking caret for the dev inline editor */
+@keyframes mystory-caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.mystory-caret {
+  position: absolute;
+  width: 3px;
+  background: #22d3ee; /* cyan-400 */
+  border-radius: 1px;
+  pointer-events: none;
+  animation: mystory-caret-blink 1s steps(1) infinite;
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.6);
+}
+.mystory-caret--typing { animation: none; opacity: 1; }
 .prose-mystory a:hover { color: var(--accent-hover); }
 
 /* MARK: - Scrollbar */

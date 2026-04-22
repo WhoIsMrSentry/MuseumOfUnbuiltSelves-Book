@@ -44,3 +44,17 @@ cover: "url_to_image"
 - Avoid quotes with inline commas or unescaped strings in my frontmatter unless strictly necessary; keep parsing simple.
 - **Short Lines (VS Code Compatibility):** All `.mdx` content should be formatted with manual line breaks (short lines) to ensure the text is easily readable and editable in VS Code without horizontal scrolling. Break lines at logical points (around 80-100 characters).
 - **Cover Images:** When generating AI cover images for chapters, ALWAYS draw the pure environment. DO NOT include characters, human figures, or silhouettes in the generated cover art.
+
+## 5. Kisho Library Files
+
+When working inside `content/stories/kisho/`, always check the canon library files in
+`content/stories/kisho/library/` and keep each file scoped correctly.
+
+- `foundations.md`: World rules, crystal-system canon, social structure, and the
+  story's baseline foundations.
+- `rules.md`: Narrative discipline, spoiler boundaries, wording consistency, and
+  workflow rules for edits.
+- `story_memory.md`: Story-encountered people, animals, plants, places, concepts,
+  and fixed terminology.
+
+If new information is added, update the matching file instead of mixing categories.

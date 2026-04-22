@@ -14,15 +14,9 @@ Açık mavi renkli kusursuz bir **altıgen prizma (jeton)** şeklindedir. İç y
 - **Aktif Çekirdek**: Parlak mavi ışık yayar, içindeki siber semboller hareketlidir.
 - **Zayıf Çekirdek**: Enerjisi düşüktür ve titrek bir ışık yayar, semboller yavaş hareket eder.
 - **Siyah Çekirdek (Ölü Çekirdek)**: Enerjisi tamamen boşalmış veya dış kalkan/kabuk vazifesi gören kısmın ayrılıp kömürleşmesiyle oluşan işlevsiz halidir.
-- **Bağlama**: Bir çekirdeğin bir nesneye bağlanması için, o nesnenin yüzeyine temas ettirilmesi ve Manipülasyon kristal yeteneği ile bağlanması gerekir. Ayrıca bu bağlama
-çekirdeğin gücünün kullanılmasının tek yoludur. Yalın bir çekirdek çoğu zaman işe yaramazdır.
-- **Sökme**: Bağlanmış bir çekirdeği sökmek için de aynı şekilde Manipülasyon yeteneği kullanılır; ancak sökme işlemi nesneyi parçalayarak da mümkün olabilir fakat bu yöntem genellikle çekirdekte kısmen yada tamamen hasara yol açar.
-- **Bağlanma İzleri**: Bir çekirdek bir nesneye bağlandığında, taşın çevresinden nesnenin dokusuna doğru parmak boyu uzayan, ince mavi izler/damarlar belirir. Bu izler statiktir; canlı değildir, kıpırdamaz, hareket etmez. Yalnızca bağlanmanın görsel damgasıdır. Çekirdek söküldüğünde veya öldüğünde bu izler **geri çekilmez**; yerlerinde sönmüş, kuru bir mürekkep lekesi gibi durur.
-- **Aktif/Deaktif Etme**: Bağlı bir çekirdeği açıp kapatmak için, kişi avucunu taşa değdirip kendi manasının küçük bir kısmını taşa aktarmalıdır. Bu yalnızca bir anahtar görevi görür — komut vermez, çekirdeğin işlevini değiştirmez. Sadece açar veya kapatır.
-- **Depolama**: Çekirdekler, sadece mana depolayabilir. Elektrik, alev, güç gibi diğer enerji türlerini depolayamazlar.
 
 ### Kristal Aileleri (Beş Dönüşüm Tipi)
-Kristaller tek tip değildir. Ustalar zamanla onların beş geniş aileye ayrıldığını fark etmişlerdir. Bir kristalin hangi aileye ait olduğu içindeki rünlerden ve verdiği tepkilerle okunur. Her kristal yalnızca tek bir aileye bağlıdır; aynı taş hem güçlendirici hem yaratıcı olamaz.
+Kristaller tek tip değildir. Ustalar zamanla onların beş geniş aileye ayrıldığını fark etmişlerdir. Bir kristalin hangi aileye ait olduğu içindeki rünlerden ve verdiği tepkilerle okunur.
 
 - **Güçlendirici (Enhancer)**: Kendisinin veya bağlandığı nesnenin var olan bir özelliğini katlar.
     Örnekler:
@@ -32,9 +26,6 @@ Kristaller tek tip değildir. Ustalar zamanla onların beş geniş aileye ayrıl
 - **Dönüştürücü (Transmutation)**: Bir tür enerjiyi veya özelliği başka bir türe çevirir.
     Örnekler:
         Manayı elektriğe, güneş ışığını manaya, suyu buhara çevirebilir.
-
-    Önemli bir not:
-        **Güneş ışığını doğrudan kristal manasına çeviren** kollar bu ailenin aşırı nadir, neredeyse efsane sayılan dallarıdır; tüm dünyadaki kristallerin yeniden dolması ancak böyle bir Dönüştürücünün aracılığıyla mümkündür.
 
 - **Ruh Bağlayıcı (Conjuration)**: Bir nesneye bağlandıktan sonra o nesnenin kaybını telafi eder. Hasar almış parçayı yeniden üretir; etrafta uygun ham madde varsa onu örer ve bağlar, yoksa kendi enerjisinden geçici bir taklit yaratır. Enerjisi tükendiği an bu ürettiği parçalar boşa düşer ya da kısa sürede dağılır.
 
@@ -47,28 +38,11 @@ Kristaller tek tip değildir. Ustalar zamanla onların beş geniş aileye ayrıl
     Örnekler:
         Dağılmış bir slime'ın gövdesini tek bir noktada toplanmaya zorlayabilir.
         Bir balığın su direncini azaltmasını sağlayabilir.
-    
-    Özel Yetenek: 
-        Bir çekirdeği nesneye bağlama/sökme işleminin tek yolu Manipülasyon yeteneğidir. 
 
 - **Özel (Efsanevi)**: Hiç bir aileye ait olmayan, koşullara göre birden çok davranış sergileyebilen son derece nadir kristaller. Efsanelerde geçer; bir tanesi bile bir derebeyini güce kavuşturmaya yeter.
 
-### Ortak Kurallar
-Aileler birbirinden ne kadar farklı olsa da hepsi aynı temel yasalara tabidir.
-
-- **Tek Kristal, Tek Aile**: Her kristal doğal hallerinde yalnızca bir aileye yeminlidir. Aynı taş hem dönüştürücü hem yaratıcı olamaz; ailesine ne kadar dar bağlıysa o işi o kadar keskin yapar.
-- **Kod Kimliği**: Kristalin içindeki sembollerin renkleri, motifleri ve ritmi taşın hangi aileden olduğunu ele verir. Deneyimli ustalar tek bakışta okuyabilir.
-- **Şarj Yalnızca Dönüştürücü Aracılığıyla Olur**: Hiçbir kristal kendi başına yeniden dolmaz. Dolum yalnızca, güneş ışığını doğrudan manaya çeviren çok nadir bir Dönüştürücü kristalin aracılığıyla mümkündür. Bu yüzden ustaların atölyelerinde bir "şarj taşı" tutulur; diğer kristaller temasla bu taştan beslenir.
-- **Canlıların içindeki Mavi Aura (MANA)**: Canlıların damarlarında dolaşan mavi aura, saf mana taşır. Bir kristal bu aurayı emdiğinde şarj olur — taşa göre az ya da çok, ama her hâlükârda ger­çek bir dolum. Küçük ve aç kristaller bir damla kanla bile gözle görülür biçimde canlanırken, büyük ve karmaşık kristaller aynı miktardan çok daha azını alır. Ayrıca bu kandan emilen mana kristalin enerji kapasitesini artırabilir, bir süre sonra ise seviyesini artırabilir.
-- **Dozaj Hayattır**: Aynı kristal tek seferde vahşi bir boşalmayla kendini öldürebilir ya da kontrollü darbelerle yüzlerce küçük işlem sürdürebilir.
-
-- **Zincirleme Bağlanma (Üssel Maliyet)**: Birden fazla kristal birbirine bağlanırsa toplam güç tüketimi üssel olarak artar. Bağlı kristal sayısı `n` ise harcanan güç `2^n` katına çıkar: 2 kristal 4 kat, 3 kristal 8 kat, 4 kristal 16 kat fazla güç tüketir. Bu yüzden çoklu kristal düzenekleri ancak çok kısa süreli ya da çok özel işler için kurulur; sıradan ustalar tek kristalle çalışmayı tercih eder.
-
-### Kristal Okuryazarlığı
-- **Ezberlenmiş Ustalık**: Yerel ustaların bir kısmı tüm runik dili çözmüş değildir; çoğu, işe yaradığını bildiği şekilleri ve düzenleri uygulamalı hafızayla tekrar eder. Yani pratik bilgi, teorik okuryazarlığın önüne geçebilir.
-
 ### Mavi Sıvı / Biyolojik İletken
-Büyülü yaratıkların damarlarında sıvı formunda dolaşır. Kristaller bu sıvıya temas ettiğinde içindeki aurayı iplik gibi sömürür ve geriye mat, tükenmiş bir sıvı bırakır.
+Büyülü yaratıkların damarlarında sıvı formunda dolaşan, mana taşıyan biyolojik iletken.
 
 ---
 

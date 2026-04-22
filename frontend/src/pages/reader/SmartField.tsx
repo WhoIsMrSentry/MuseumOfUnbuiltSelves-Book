@@ -4,8 +4,11 @@
 // title and the chapter body so they share identical caret behavior.
 // The caret only renders while the field has focus, so switching focus
 // between fields never shows two carets at once.
+// Updates to caret position and textarea auto-size are coalesced via
+// requestAnimationFrame so bursts of keystrokes never trigger more than one
+// layout pass per frame.
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 type Props = {
   value: string;
@@ -23,23 +26,23 @@ export default function SmartField({
   const fieldRef = useRef<HTMLTextAreaElement & HTMLInputElement>(null);
   const mirrorRef = useRef<HTMLDivElement | null>(null);
   const caretRef = useRef<HTMLSpanElement | null>(null);
+  const rafRef = useRef<number | null>(null);
   const [focused, setFocused] = useState(false);
 
-  // MARK: - Auto-resize textarea
-  const autoSize = useCallback(() => {
+  // MARK: - Heavy work: resize textarea + position caret. Done once per frame.
+  const performUpdate = useCallback(() => {
+    rafRef.current = null;
     const f = fieldRef.current;
-    if (!f || !multiline) return;
-    f.style.height = 'auto';
-    f.style.height = `${f.scrollHeight}px`;
-  }, [multiline]);
-  useEffect(() => { autoSize(); }, [value, autoSize]);
+    if (!f) return;
 
-  // MARK: - Position caret using a hidden mirror that copies field metrics
-  const updateCaret = useCallback(() => {
-    const f = fieldRef.current;
+    if (multiline) {
+      f.style.height = 'auto';
+      f.style.height = `${f.scrollHeight}px`;
+    }
+
     const mirror = mirrorRef.current;
     const caret = caretRef.current;
-    if (!f || !mirror || !caret) return;
+    if (!mirror || !caret) return;
 
     const cs = getComputedStyle(f);
     mirror.style.font = cs.font;
@@ -81,7 +84,17 @@ export default function SmartField({
     }
   }, [multiline, centerOnType]);
 
-  useEffect(() => { if (focused) updateCaret(); }, [focused, value, updateCaret]);
+  const schedule = useCallback(() => {
+    if (rafRef.current != null) return;
+    rafRef.current = requestAnimationFrame(performUpdate);
+  }, [performUpdate]);
+
+  useEffect(() => () => {
+    if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // MARK: - Sync after value changes (covers programmatic updates, mount, etc.)
+  useLayoutEffect(() => { if (focused) schedule(); }, [focused, value, schedule]);
 
   const baseClass = `block w-full border-0 bg-transparent p-0 text-[var(--text)] caret-transparent outline-none focus:ring-0 ${
     multiline ? 'resize-none font-[inherit] text-[length:inherit] leading-[inherit]' : ''
@@ -92,12 +105,10 @@ export default function SmartField({
     value,
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       onChange(e.target.value);
-      autoSize();
-      updateCaret();
     },
-    onKeyUp: updateCaret,
-    onClick: (e: React.MouseEvent) => { e.stopPropagation(); updateCaret(); },
-    onFocus: () => { setFocused(true); updateCaret(); },
+    onKeyUp: schedule,
+    onClick: (e: React.MouseEvent) => { e.stopPropagation(); schedule(); },
+    onFocus: () => { setFocused(true); schedule(); },
     onBlur: () => setFocused(false),
     spellCheck: false,
     placeholder,

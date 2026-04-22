@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useReader } from '@/pages/useReader';
@@ -11,6 +10,7 @@ import ChapterContent from '@/pages/reader/ChapterContent';
 import Pagination from '@/pages/reader/Pagination';
 import SettingsSheet from '@/pages/reader/SettingsSheet';
 import NewChapterButton from '@/pages/reader/NewChapterButton';
+import { useMountTransition } from '@/pages/reader/useMountTransition';
 
 const TOOLBAR_HIDE_MS = 3500;
 
@@ -22,6 +22,9 @@ export default function Reader() {
   const [toolbar, setToolbar] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const toolbarT = useMountTransition(toolbar, 200);
+  const settingsT = useMountTransition(showSettings, 200);
 
   const resetTimer = useCallback(() => {
     if (hideTimer.current) clearTimeout(hideTimer.current);
@@ -70,14 +73,13 @@ export default function Reader() {
         <ArrowLeft size={18} />
       </Link>
 
-      <AnimatePresence>
-        {toolbar && (
-          <TopBar
-            title={r.entry.metadata.title}
-            subtitle={`${r.book.title} · ${r.pageIndex + 1}/${r.total}`}
-          />
-        )}
-      </AnimatePresence>
+      {toolbarT.mounted && (
+        <TopBar
+          title={r.entry.metadata.title}
+          subtitle={`${r.book.title} · ${r.pageIndex + 1}/${r.total}`}
+          entered={toolbarT.entered}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl px-4 pb-28 pt-14 sm:px-6 md:px-8">
         {r.page ? (
@@ -98,25 +100,22 @@ export default function Reader() {
         )}
       </article>
 
-      <AnimatePresence>
-        {toolbar && (
-          <BottomBar
-            current={r.pageIndex + 1}
-            total={r.total}
-            hasPrev={r.hasPrev}
-            hasNext={r.hasNext}
-            onPrev={r.goPrev}
-            onNext={r.goNext}
-            onSettings={() => { setShowSettings(true); setToolbar(true); }}
-          />
-        )}
-      </AnimatePresence>
+      {toolbarT.mounted && (
+        <BottomBar
+          current={r.pageIndex + 1}
+          total={r.total}
+          hasPrev={r.hasPrev}
+          hasNext={r.hasNext}
+          onPrev={r.goPrev}
+          onNext={r.goNext}
+          onSettings={() => { setShowSettings(true); setToolbar(true); }}
+          entered={toolbarT.entered}
+        />
+      )}
 
-      <AnimatePresence>
-        {showSettings && (
-          <SettingsSheet onClose={() => setShowSettings(false)} />
-        )}
-      </AnimatePresence>
+      {settingsT.mounted && (
+        <SettingsSheet onClose={() => setShowSettings(false)} entered={settingsT.entered} />
+      )}
     </div>
   );
 }

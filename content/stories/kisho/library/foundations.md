@@ -146,3 +146,11 @@ aktarılır. Güven, tekrar ve sahada çalışma bu sistemin temelidir.
 Ocak Kanlı zanaatının ileri teorik ve pratik bilgisi büyük merkez akademilerde
 toplanır. Taşra ustaları ile akademi eğitimi arasındaki fark, bilgi derinliğinde
 belirgindir.
+
+### Dünyanın ortak dili
+Bu dünyada geniş bölgelerde kullanılan ortak dil Türkçedir. Ticaret, zanaat, şehirler
+arası temas ve resmiyet gerektiren çoğu iletişim bu ortak dil üzerinden yürür.
+
+### Sınır köylerinin dilleri
+Sınır köyleri ve izole topluluklar kendi özgün dillerini ya da lehçelerini korur.
+Bu bölgelerde ortak dil bilinse bile herkes aynı akıcılıkta konuşmaz.

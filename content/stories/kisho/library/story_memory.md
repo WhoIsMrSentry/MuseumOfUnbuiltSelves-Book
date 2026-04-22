@@ -14,7 +14,8 @@ yer almışsa buraya yazılır.
 
 ### Elin
 Kisho'nun rehberlik ettiği, dünyayı ve dili parça parça öğrendiği turuncu saçlı kız
-çocuğu. Rusça konuşur.
+çocuğu. Kendi sınır lehçesini konuşur; ortak dil Türkçeden yalnızca birkaç kırık
+kelime bilir.
 
 ### Lord Valerius
 Elin'in babası ve kuzey sınırının güçlü derebeylerinden biridir. Sertliği ve askeri

@@ -5,6 +5,7 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import mdxMtime from './plugins/mdx-mtime'
 import mdxEditor from './plugins/mdx-editor'
+import coverOptimize from './plugins/cover-optimize'
 
 // MARK: - Vite Configuration
 // https://vite.dev/config/
@@ -15,6 +16,7 @@ export default defineConfig({
     tailwindcss(),
     mdxMtime(path.resolve(__dirname, '../content/stories')),
     mdxEditor(path.resolve(__dirname, '../content/stories')),
+    coverOptimize(),
   ],
   resolve: {
     alias: {

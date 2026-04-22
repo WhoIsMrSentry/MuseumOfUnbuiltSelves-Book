@@ -40,6 +40,16 @@ bir ad gerekiyorsa önce `story_memory.md` ile hizala.
 Yerleşmiş bir terim varken aynı kavram için rastgele yeni karşılık üretme. Zorunlu
 bir yeni ad çıkarsa önce sözlüğe ekle, sonra metinde kullan.
 
+### Ortak dili kusursuz yapma
+Dünyanın ortak dili Türkçe olsa da her karakter onu kusursuz, pürüzsüz ve aynı
+seviyede konuşmaz. Özellikle sınır köylerinden gelenler zaman zaman kendi ana
+dillerinden kelimeler, deyimler ya da kırık yapılar sızdırmalıdır.
+
+### Dil farklılıklarını koru
+Özgün diller yalnızca dekor olarak kalmamalı; konuşanın kökenini, eğitimini ve
+sosyal çevresini hissettirmelidir. Ortak dil kullanılırken bile karakterlerin sesi
+birbirine tamamen benzememelidir.
+
 ---
 
 ## Çalışma Akışı

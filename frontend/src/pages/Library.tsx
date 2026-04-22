@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { BookMarked, ChevronRight } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import { enrichBookMeta, getAllBooks, type Book } from '@/utils/markdown';
 import { useProgressStore } from '@/store/progress';
 
@@ -40,13 +40,9 @@ export default function Library() {
 function Header() {
   return (
     <header className="mb-10 sm:mb-14">
-      <motion.h1
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold tracking-tight sm:text-4xl"
-      >
+      <h1 className="animate-[fade-in-down_0.4s_ease-out_both] text-3xl font-bold tracking-tight sm:text-4xl">
         Library
-      </motion.h1>
+      </h1>
       <p className="mt-2 text-sm text-[var(--muted)]">My published stories.</p>
     </header>
   );
@@ -70,10 +66,9 @@ function BookCard({ book, index, savedSlug }: { book: Book; index: number; saved
   const pct = hasProgress ? Math.round(((savedIdx + 1) / book.pages.length) * 100) : 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
+    <div
+      className="animate-[fade-in-up_0.4s_ease-out_both]"
+      style={{ animationDelay: `${index * 50}ms` }}
     >
       <Link
         to={`/reader/${book.bookSlug}/${target}`}
@@ -81,7 +76,7 @@ function BookCard({ book, index, savedSlug }: { book: Book; index: number; saved
       >
         {book.cover && (
           <div className="relative aspect-[16/10] overflow-hidden border-b border-white/5">
-            <img
+            <OptimizedImage
               src={book.cover}
               alt={book.title}
               loading="lazy"
@@ -119,6 +114,6 @@ function BookCard({ book, index, savedSlug }: { book: Book; index: number; saved
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

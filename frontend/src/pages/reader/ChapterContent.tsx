@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ChapterEditor from '@/pages/reader/ChapterEditor';
 import ChapterReadView from '@/pages/reader/ChapterReadView';
@@ -22,8 +22,11 @@ export default function ChapterContent({ page, number }: { page: Page; number: n
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const startEditing = useCallback(() => setEditing(true), []);
+  const stopEditing = useCallback(() => setEditing(false), []);
+
   if (isDev && editing) {
-    return <ChapterEditor page={page} number={number} onClose={() => setEditing(false)} />;
+    return <ChapterEditor page={page} number={number} onClose={stopEditing} />;
   }
-  return <ChapterReadView page={page} number={number} onEdit={isDev ? () => setEditing(true) : undefined} />;
+  return <ChapterReadView page={page} number={number} onEdit={isDev ? startEditing : undefined} />;
 }

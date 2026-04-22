@@ -1,15 +1,18 @@
+import { memo, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Pencil } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import type { Page } from '@/utils/markdown';
 
-export default function ChapterReadView({ page, number, onEdit }: {
+function ChapterReadView({ page, number, onEdit }: {
   page: Page; number: number; onEdit?: () => void;
 }) {
+  const md = useMemo(() => <ReactMarkdown>{page.content}</ReactMarkdown>, [page.content]);
   return (
     <section className="py-6">
       {page.metadata.cover && (
         <div className="mb-8 overflow-hidden rounded-2xl border border-white/[0.08] shadow-2xl">
-          <img
+          <OptimizedImage
             src={page.metadata.cover}
             alt={page.metadata.title}
             className="aspect-[16/9] w-full object-cover transition-transform duration-500 hover:scale-105"
@@ -44,8 +47,10 @@ export default function ChapterReadView({ page, number, onEdit }: {
         <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{page.metadata.description}</p>
       )}
       <div className="prose prose-invert prose-mystory max-w-none prose-sm sm:prose-base md:prose-lg prose-p:my-3 prose-p:leading-7 sm:prose-p:my-4 sm:prose-p:leading-8 prose-a:underline prose-a:underline-offset-4">
-        <ReactMarkdown>{page.content}</ReactMarkdown>
+        {md}
       </div>
     </section>
   );
 }
+
+export default memo(ChapterReadView);

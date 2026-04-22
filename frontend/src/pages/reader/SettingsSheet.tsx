@@ -1,24 +1,20 @@
-import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { SETTING_GROUPS, useSettingsStore, type SettingsState } from '@/store/settings';
 
-export default function SettingsSheet({ onClose }: { onClose: () => void }) {
+export default function SettingsSheet({ onClose, entered }: { onClose: () => void; entered: boolean }) {
   const update = useSettingsStore((s) => s.update);
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <div
       onClick={onClose}
-      className="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm"
+      className={`fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm transition-opacity duration-200 ${
+        entered ? 'opacity-100' : 'opacity-0'
+      }`}
     >
-      <motion.div
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        exit={{ y: '100%' }}
-        transition={{ type: 'spring', damping: 30, stiffness: 320 }}
+      <div
         onClick={(e) => e.stopPropagation()}
-        className="absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-3xl bg-[var(--card)] px-5 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-3 sm:px-6"
+        className={`absolute inset-x-0 bottom-0 max-h-[80vh] overflow-y-auto rounded-t-3xl bg-[var(--card)] px-5 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-3 transition-transform duration-200 ease-out sm:px-6 ${
+          entered ? 'translate-y-0' : 'translate-y-full'
+        }`}
       >
         <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-white/15" />
         <div className="mb-2 flex items-center justify-between">
@@ -35,8 +31,8 @@ export default function SettingsSheet({ onClose }: { onClose: () => void }) {
         {(Object.keys(SETTING_GROUPS) as (keyof SettingsState)[]).map((k) => (
           <SettingsRow key={k} settingKey={k} onChange={(v) => update({ [k]: v } as Partial<SettingsState>)} />
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 

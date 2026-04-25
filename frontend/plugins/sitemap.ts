@@ -1,7 +1,7 @@
-// MARK: - Vite Plugin: Sitemap Generator
+﻿// MARK: - Vite Plugin: Sitemap Generator
 // Walks content/stories/**/*.mdx at build time and emits:
-//   • dist/sitemap.xml  — every book + every chapter
-//   • dist/robots.txt   — overrides public/robots.txt with absolute sitemap URL
+//   - dist/sitemap.xml  - every book + every chapter
+//   - dist/robots.txt   - overrides public/robots.txt with absolute sitemap URL
 // Both are deterministic and need zero runtime cost.
 
 import { readdirSync, statSync } from 'fs';
@@ -10,7 +10,7 @@ import type { Plugin } from 'vite';
 
 interface SitemapOptions {
   storiesDir: string;
-  siteUrl: string; // e.g. "https://hamzayslmn.github.io/mystory"
+  siteUrl: string; // e.g. "https://whoismrsentry.github.io/museum-of-unbuilt-selves"
 }
 
 interface UrlEntry {
@@ -86,3 +86,4 @@ export default function sitemapPlugin(opts: SitemapOptions): Plugin {
     },
   };
 }
+

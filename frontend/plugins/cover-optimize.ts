@@ -1,4 +1,4 @@
-// MARK: - cover-optimize Vite plugin
+﻿// MARK: - cover-optimize Vite plugin
 // Build-time only. After Vite emits the production bundle, walks the asset
 // directory and generates `.webp` and `.avif` siblings for every PNG/JPG.
 // Also re-compresses the original PNG/JPG with sharp's better encoders so
@@ -27,7 +27,7 @@ export default function coverOptimize(opts: Options = {}): Plugin {
   } = opts;
 
   return {
-    name: 'mystory-cover-optimize',
+    name: 'museum-of-unbuilt-selves-cover-optimize',
     apply: 'build',
     async closeBundle() {
       const sharp = (await import('sharp')).default;
@@ -80,3 +80,4 @@ export default function coverOptimize(opts: Options = {}): Plugin {
     },
   };
 }
+

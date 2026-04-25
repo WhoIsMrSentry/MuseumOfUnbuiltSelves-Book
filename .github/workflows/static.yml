@@ -1,5 +1,5 @@
-# Simple workflow for deploying static Vite React app to GitHub Pages
-name: Deploy static content to Pages
+# Workflow for deploying Museum Of Unbuilt Selves to GitHub Pages
+name: Deploy Museum Of Unbuilt Selves
 
 on:
   # Runs on pushes targeting the default branch

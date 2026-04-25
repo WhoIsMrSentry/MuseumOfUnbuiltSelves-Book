@@ -4,7 +4,7 @@ import sys
 
 def compile_mdx_files(target_folder="", output_file="story_output.txt"):
     if not target_folder:
-        target_folder = input("Which story folder would you like to compile? (e.g. 'kisho' or 'content/stories/kisho'): ")
+        target_folder = input("Which story folder would you like to compile? (e.g. 'museum-of-unbuilt-selves' or 'content/stories/museum-of-unbuilt-selves'): ")
         
     # If the user only gave the story name, map it to the full path
     if not os.path.exists(target_folder):

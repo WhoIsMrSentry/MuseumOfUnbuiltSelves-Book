@@ -1,4 +1,4 @@
-﻿import { defineConfig } from 'vite'
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
@@ -11,7 +11,7 @@ import sitemap from './plugins/sitemap'
 // MARK: - Vite Configuration
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/museum-of-unbuilt-selves/',
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
@@ -20,7 +20,7 @@ export default defineConfig({
     coverOptimize(),
     sitemap({
       storiesDir: path.resolve(__dirname, '../content/stories'),
-      siteUrl: 'https://whoismrsentry.github.io/museum-of-unbuilt-selves',
+      siteUrl: 'https://whoismrsentry.github.io',
     }),
   ],
   resolve: {

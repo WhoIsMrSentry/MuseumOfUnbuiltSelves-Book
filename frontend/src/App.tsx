@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LoaderCircle } from 'lucide-react';
 
@@ -16,7 +16,7 @@ function Fallback() {
 
 function App() {
   return (
-    <Router basename="/museum-of-unbuilt-selves/">
+    <Router basename="/">
       <Suspense fallback={<Fallback />}>
         <Routes>
           <Route path="/" element={<Library />} />

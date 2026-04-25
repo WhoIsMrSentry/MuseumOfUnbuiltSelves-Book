@@ -10,9 +10,11 @@ import ChapterContent from '@/pages/reader/ChapterContent';
 import Pagination from '@/pages/reader/Pagination';
 import SettingsSheet from '@/pages/reader/SettingsSheet';
 import NewChapterButton from '@/pages/reader/NewChapterButton';
+import QuotesSheet from '@/pages/reader/QuotesSheet';
 import { useMountTransition } from '@/pages/reader/useMountTransition';
 import { useEditingStore } from '@/store/editing';
 import { useDocumentMeta } from '@/hooks/useDocumentMeta';
+import { getBookQuotes, type QuoteEntry } from '@/utils/markdown';
 
 const TOOLBAR_HIDE_MS = 3500;
 
@@ -25,19 +27,21 @@ export default function Reader() {
   const chapterTitle = r.page?.metadata.title ?? r.entry?.metadata.title ?? '';
   const chapterDesc = r.page?.metadata.description
     || (r.page ? r.page.content.replace(/\s+/g, ' ').slice(0, 160) : '')
-    || `${bookName} — hamzayslmn tarafından yazılan özgün fantastik hikaye.`;
+    || `${bookName} anlatısının bir bölümü.`;
 
   useDocumentMeta({
-    title: chapterTitle ? `${chapterTitle} — ${bookName} | hamzayslmn` : `${bookName} | MyStory`,
+    title: chapterTitle ? `${chapterTitle} - ${bookName} | İnşa Edilmemiş Benlikler Müzesi` : `${bookName} | İnşa Edilmemiş Benlikler Müzesi`,
     description: chapterDesc,
     path: `/reader/${bookSlug}/${pageSlug}`,
     image: r.page?.metadata.cover,
     type: 'article',
-    keywords: [bookSlug ?? '', 'kisho', 'fantasy', 'story', 'hamzayslmn', 'fantastik hikaye', 'türkçe roman'],
+    keywords: [bookSlug ?? '', 'inşa edilmemiş benlikler müzesi', 'roman', 'hikaye', 'alıntı', 'bilim kurgu', 'metaforik'],
   });
 
   const [toolbar, setToolbar] = useState(true);
   const [showSettings, setShowSettings] = useState(false);
+  const [showQuotes, setShowQuotes] = useState(false);
+  const [quotes, setQuotes] = useState<QuoteEntry[]>([]);
 
   // MARK: - Auto-hide the toolbar; reset timer whenever it becomes visible.
   useEffect(() => {
@@ -49,6 +53,16 @@ export default function Reader() {
   // MARK: - Suppress toolbar entirely while editing.
   const toolbarT = useMountTransition(toolbar && !editing, 200);
   const settingsT = useMountTransition(showSettings, 200);
+  const quotesT = useMountTransition(showQuotes, 200);
+
+  useEffect(() => {
+    if (!showQuotes || !r.book) return;
+    let alive = true;
+    getBookQuotes(r.book.bookSlug).then((items) => {
+      if (alive) setQuotes(items);
+    });
+    return () => { alive = false; };
+  }, [showQuotes, r.book]);
 
   // MARK: - Keyboard nav (ignores typing into form fields).
   useEffect(() => {
@@ -78,7 +92,7 @@ export default function Reader() {
 
       <Link
         to="/"
-        aria-label="Back to Library"
+        aria-label="Kütüphaneye dön"
         className="fixed left-3 top-3 z-[60] flex h-10 w-10 items-center justify-center rounded-full bg-[var(--bg)]/80 backdrop-blur-sm transition-colors hover:bg-white/10 active:scale-95 sm:left-4 sm:top-4"
       >
         <ArrowLeft size={18} />
@@ -89,6 +103,7 @@ export default function Reader() {
           title={r.entry.metadata.title}
           subtitle={`${r.book.title} · ${r.pageIndex + 1}/${r.total}`}
           entered={toolbarT.entered}
+          onQuotes={() => { setShowQuotes(true); setToolbar(true); }}
         />
       )}
 
@@ -127,6 +142,16 @@ export default function Reader() {
       {settingsT.mounted && (
         <SettingsSheet onClose={() => setShowSettings(false)} entered={settingsT.entered} />
       )}
+
+      {r.book && quotesT.mounted && (
+        <QuotesSheet
+          entered={quotesT.entered}
+          onClose={() => setShowQuotes(false)}
+          bookSlug={r.book.bookSlug}
+          quotes={quotes}
+        />
+      )}
     </div>
   );
 }
+

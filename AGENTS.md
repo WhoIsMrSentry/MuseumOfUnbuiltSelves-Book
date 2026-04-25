@@ -1,4 +1,4 @@
-# MyStory Agent Protocol & MDX Conventions
+﻿# Museum Of Unbuilt Selves Agent Protocol & MDX Conventions
 
 This document serves as a standard ruleset for any developers or AI agents interacting with my personal storytelling platform. It explains the core rendering logic, MDX syntax, and folder structuring necessary to maintain my ecosystem.
 
@@ -31,7 +31,7 @@ cover: "url_to_image"
 - `description` *(String / Optional)*: A short synopsis. If this is the *first* page of a Book, the Library utilizes this description for the Book's preview card.
 - `cover` *(String / Optional)*: A future-proof token for attaching book covers.
 
-> **Note:** `date` is **not** stored in frontmatter. The "Son düzenlenme" (last modified) date is automatically derived from each file's filesystem modification time via a Vite plugin (`plugins/mdx-mtime.ts`). No manual date entry is needed.
+> **Note:** `date` is **not** stored in frontmatter. The "Son duzenlenme" (last modified) date is automatically derived from each file's filesystem modification time via a Vite plugin (`plugins/mdx-mtime.ts`). No manual date entry is needed.
 
 ## 3. Styling & The Reader Platform
 
@@ -44,16 +44,13 @@ cover: "url_to_image"
 - Avoid quotes with inline commas or unescaped strings in my frontmatter unless strictly necessary; keep parsing simple.
 - **Cover Images:** When generating AI cover images for chapters, ALWAYS draw the pure environment. DO NOT include characters, human figures, or silhouettes in the generated cover art.
 
-## 5. Kisho Library Files
+## 5. Current Canon Scope
 
-When working inside `content/stories/kisho/`, always check the canon library files in
-`content/stories/kisho/library/` and keep each file scoped correctly.
+The active story source is:
 
-- `foundations.md`: World rules, crystal-system canon, social structure, and the
-  story's baseline foundations.
-- `rules.md`: Narrative discipline, spoiler boundaries, wording consistency, and
-  workflow rules for edits.
-- `story_memory.md`: Story-encountered people, animals, plants, places, concepts,
-  and fixed terminology.
+- `content/stories/museum-of-unbuilt-selves/`
 
-If new information is added, update the matching file instead of mixing categories.
+If you introduce canon memory files for this book, keep them under a dedicated
+`library/` folder inside the same book directory and separate them by role
+(world rules vs narrative rules vs encountered entities).
+

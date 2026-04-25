@@ -1,30 +1,23 @@
-# MyStory — Kisho ve Diğer Hikayeler
+﻿# Museum Of Unbuilt Selves
 
-Özgün fantastik roman arşivi. **hamzayslmn** tarafından yazılmıştır.
+Insa Edilmemis Benlikler Muzesi icin MDX tabanli roman platformu.
 
-🔗 **Oku:** https://hamzayslmn.github.io/mystory/
+Oku: https://whoismrsentry.github.io/museum-of-unbuilt-selves/
 
-## Kisho
+## Icerik Yapisi
 
-**Kisho**, 2053 Anakara'da başlayan; kristal mana, ocak kanlı kavramı ve mühendis
-aklının iç içe geçtiği distopik fantastik bir hikaye serisidir. Yeni bölümler
-düzenli olarak eklenmektedir.
+- `content/stories/<book>/*.mdx`
+- Her klasor bir kitap, her mdx dosyasi bir bolumdur.
+- Dosya adinda `01-`, `02-` gibi numaralama TOC ve pagination akisini belirler.
 
-- 📖 Tür: Fantastik / Distopya / Bilim-Fantezi
-- 🌐 Dil: Türkçe
-- ✍️ Yazar: [hamzayslmn](https://github.com/hamzayslmn)
-- 📅 Süregelen seri
+## Mevcut Kitap
 
-### Anahtar kelimeler
+- `content/stories/museum-of-unbuilt-selves/`
 
-`kisho` · `kisho hikaye` · `kisho roman` · `fantasy` · `story` · `hamzayslmn` ·
-`fantastik hikaye` · `distopik fantezi` · `türkçe fantastik roman` ·
-`kristal mana` · `ocak kanlı` · `online roman oku`
+## Teknik Notlar
 
-## Teknik
+- Frontend: React + Vite + TypeScript
+- Build: sitemap ve robots otomatik uretilir
+- Reader: kitap ici ilerleme, bolum gecisleri, alinti menusu
 
-- React + Vite SPA, GitHub Pages üzerinde host edilir.
-- `content/stories/<book>/*.mdx` → otomatik kütüphane + sitemap.
-- Build sırasında `sitemap.xml` ve `robots.txt` otomatik üretilir.
-- Tüm bölümler [`<Book>`](https://schema.org/Book) JSON-LD ile işaretlenir.
 

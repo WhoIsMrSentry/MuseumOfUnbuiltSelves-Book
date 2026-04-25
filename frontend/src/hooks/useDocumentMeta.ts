@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
 
 // MARK: - SEO meta hook
 // Updates <title>, description, canonical, OG/Twitter on route change.
@@ -7,14 +7,14 @@ import { useEffect } from 'react';
 export interface DocMeta {
   title: string;
   description: string;
-  path: string;       // route path, e.g. "/reader/kisho/chapter1"
+  path: string;       // route path, e.g. "/reader/museum-of-unbuilt-selves/01-bolum-1"
   image?: string;     // absolute URL preferred; relative ok
   type?: 'website' | 'article' | 'book';
   keywords?: string[];
 }
 
-const SITE_URL = 'https://hamzayslmn.github.io/mystory';
-const SITE_NAME = 'MyStory by hamzayslmn';
+const SITE_URL = 'https://whoismrsentry.github.io/museum-of-unbuilt-selves';
+const SITE_NAME = 'İnşa Edilmemiş Benlikler Müzesi';
 
 function setMeta(selector: string, attr: string, value: string) {
   let el = document.head.querySelector<HTMLMetaElement | HTMLLinkElement>(selector);
@@ -63,3 +63,4 @@ export function useDocumentMeta(meta: DocMeta) {
     setMeta('meta[name="twitter:image"]', 'content', image);
   }, [meta.title, meta.description, meta.path, meta.image, meta.type, meta.keywords?.join('|')]);
 }
+

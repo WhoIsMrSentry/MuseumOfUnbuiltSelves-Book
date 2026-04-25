@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 // MARK: - Reading progress map: { bookSlug -> last pageSlug }
@@ -20,7 +20,7 @@ export const useProgressStore = create<ProgressStore>()(
       }),
     }),
     {
-      name: 'mystory_reading_progress',
+      name: 'museum_unbuilt_selves_reading_progress',
       storage: createJSONStorage(() => localStorage),
       partialize: (s) => ({ map: s.map }),
     },
@@ -30,3 +30,4 @@ export const useProgressStore = create<ProgressStore>()(
 // MARK: - Non-reactive accessor (for utilities/effects that don't need subscription)
 export const getProgress = (bookSlug: string): string | null =>
   useProgressStore.getState().map[bookSlug] || null;
+

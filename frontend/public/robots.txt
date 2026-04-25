@@ -1,4 +1,5 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://hamzayslmn.github.io/mystory/sitemap.xml
+Sitemap: https://whoismrsentry.github.io/museum-of-unbuilt-selves/sitemap.xml
+

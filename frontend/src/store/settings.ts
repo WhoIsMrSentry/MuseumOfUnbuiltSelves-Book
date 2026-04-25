@@ -1,4 +1,4 @@
-﻿import { create } from 'zustand';
+import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 // MARK: - Types
@@ -16,7 +16,7 @@ interface SettingsStore extends SettingsState {
   update: (patch: Partial<SettingsState>) => void;
 }
 
-const DEFAULTS: SettingsState = { theme: 'obsidian', font: 'fancy', fontSize: 'lg' };
+const DEFAULTS: SettingsState = { theme: 'sentry-kizili', font: 'fancy', fontSize: 'lg' };
 
 // MARK: - DOM mapping (key -> attribute, optional default value to omit)
 const DOM_MAP: { [K in keyof SettingsState]: { attr: string; defaultValue?: SettingsState[K] } } = {

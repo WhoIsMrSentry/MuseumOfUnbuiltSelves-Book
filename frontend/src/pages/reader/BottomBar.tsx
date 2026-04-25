@@ -14,12 +14,12 @@ export default function BottomBar(props: {
       }`}
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-1">
-        <NavBtn disabled={!props.hasPrev} icon={<ChevronLeft size={18} />} label="Prev" onClick={props.onPrev} />
+        <NavBtn disabled={!props.hasPrev} icon={<ChevronLeft size={18} />} label="Geri" onClick={props.onPrev} />
         <span className="text-xs tabular-nums text-[var(--muted)] sm:text-sm">
           {props.current} / {props.total}
         </span>
-        <NavBtn disabled={!props.hasNext} icon={<ChevronRight size={18} />} label="Next" onClick={props.onNext} />
-        <NavBtn icon={<Settings2 size={18} />} onClick={props.onSettings} />
+        <NavBtn disabled={!props.hasNext} icon={<ChevronRight size={18} />} label="İleri" onClick={props.onNext} />
+        <NavBtn icon={<Settings2 size={18} />} label="Ayarlar" onClick={props.onSettings} />
       </div>
     </nav>
   );

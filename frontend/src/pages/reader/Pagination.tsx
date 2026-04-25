@@ -9,10 +9,10 @@ export default function Pagination({ bookSlug, prev, next, onFinish }: {
 }) {
   const link = (slug: string) => `/reader/${bookSlug}/${slug}`;
   const items: (SideItem | null)[] = [
-    prev ? { side: 'left',  to: link(prev.pageSlug), label: 'Previous', title: prev.metadata.title } : null,
+    prev ? { side: 'left',  to: link(prev.pageSlug), label: 'Önceki', title: prev.metadata.title } : null,
     next
-      ? { side: 'right', to: link(next.pageSlug), label: 'Next', title: next.metadata.title }
-      : { side: 'right', to: '/', label: 'Finished', title: 'Back to Library', onClick: onFinish },
+      ? { side: 'right', to: link(next.pageSlug), label: 'Sonraki', title: next.metadata.title }
+      : { side: 'right', to: '/', label: 'Bitti', title: 'Kütüphaneye Dön', onClick: onFinish },
   ];
 
   return (

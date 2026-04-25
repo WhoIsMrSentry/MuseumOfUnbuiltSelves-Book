@@ -12,12 +12,12 @@ export default function Library() {
   const progressMap = useProgressStore((s) => s.map);
 
   useDocumentMeta({
-    title: 'Kisho ve Diğer Hikayeler — MyStory by hamzayslmn',
+    title: 'İnşa Edilmemiş Benlikler Müzesi',
     description:
-      "hamzayslmn tarafından yazılan özgün hikayeler. Kisho: 2053 Anakara'da başlayan, kristal manaya dayanan distopik fantastik bir roman serisi.",
+      'İnşa edilmemiş benliklerin hikayeleri, bölümleri ve seçili alıntılarını tek bir kütüphanede toplar.',
     path: '/',
     type: 'website',
-    keywords: ['kisho', 'fantasy', 'story', 'hamzayslmn', 'fantastik hikaye', 'distopya', 'türkçe roman', 'mystory'],
+    keywords: ['inşa edilmemiş benlikler müzesi', 'hikaye', 'roman', 'alıntı', 'kitap kütüphanesi'],
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Library() {
             </main>
           )}
         <footer className="mt-20 text-center text-xs text-[var(--muted)] opacity-60">
-          MyStory &copy; {new Date().getFullYear()}
+          İnşa Edilmemiş Benlikler Müzesi &copy; {new Date().getFullYear()}
         </footer>
       </div>
     </div>
@@ -51,9 +51,9 @@ function Header() {
   return (
     <header className="mb-10 sm:mb-14">
       <h1 className="animate-[fade-in-down_0.4s_ease-out_both] text-3xl font-bold tracking-tight sm:text-4xl">
-        Library
+        İnşa Edilmemiş Benlikler Müzesi
       </h1>
-      <p className="mt-2 text-sm text-[var(--muted)]">My published stories.</p>
+      <p className="mt-2 text-sm text-[var(--muted)]">Hikayeler ve seçili alıntılar kütüphanesi.</p>
     </header>
   );
 }
@@ -63,7 +63,7 @@ function Empty() {
   return (
     <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-white/10 bg-white/[0.02] py-16 text-center text-[var(--muted)]">
       <BookMarked size={36} className="opacity-40" />
-      <p className="text-sm">No books yet.</p>
+      <p className="text-sm">Henüz kitap yok.</p>
     </div>
   );
 }
@@ -105,7 +105,7 @@ function BookCard({ book, index, savedSlug }: { book: Book; index: number; saved
           <div className="mt-2 flex items-end justify-between border-t border-white/5 pt-4">
             <div className="flex flex-col gap-1.5">
               <span className="text-xs text-[var(--muted)]">
-                {hasProgress ? `${savedIdx + 1} / ${book.pages.length}` : `${book.pages.length} chapters`}
+                {hasProgress ? `${savedIdx + 1} / ${book.pages.length}` : `${book.pages.length} bölüm`}
               </span>
               {hasProgress && (
                 <div className="h-1 w-20 overflow-hidden rounded-full bg-white/10">
@@ -117,7 +117,7 @@ function BookCard({ book, index, savedSlug }: { book: Book; index: number; saved
               )}
             </div>
             <span className="flex items-center gap-1 text-xs font-medium text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
-              {hasProgress ? 'Continue' : 'Read'} <ChevronRight size={14} />
+              {hasProgress ? 'Devam et' : 'Oku'} <ChevronRight size={14} />
             </span>
           </div>
         </div>

@@ -1,5 +1,7 @@
-export default function TopBar({ title, subtitle, entered }: {
-  title: string; subtitle: string; entered: boolean;
+import { Quote } from 'lucide-react';
+
+export default function TopBar({ title, subtitle, entered, onQuotes }: {
+  title: string; subtitle: string; entered: boolean; onQuotes?: () => void;
 }) {
   return (
     <header
@@ -11,6 +13,17 @@ export default function TopBar({ title, subtitle, entered }: {
         <p className="truncate text-sm font-medium">{title}</p>
         <p className="truncate text-xs text-[var(--muted)]">{subtitle}</p>
       </div>
+      {onQuotes && (
+        <button
+          type="button"
+          onClick={onQuotes}
+          title="Alıntılar"
+          aria-label="Alıntıları aç"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--quote-accent)]/40 bg-[color:var(--quote-accent)]/10 text-[var(--quote-accent)] transition-colors hover:bg-[color:var(--quote-accent)]/20"
+        >
+          <Quote size={15} />
+        </button>
+      )}
     </header>
   );
 }

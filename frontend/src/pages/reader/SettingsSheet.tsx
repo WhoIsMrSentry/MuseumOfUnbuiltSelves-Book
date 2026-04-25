@@ -18,11 +18,11 @@ export default function SettingsSheet({ onClose, entered }: { onClose: () => voi
       >
         <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-white/15" />
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-base font-semibold">Settings</h2>
+          <h2 className="text-base font-semibold">Ayarlar</h2>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label="Kapat"
             className="flex h-9 w-9 items-center justify-center rounded-full text-[var(--muted)] transition-colors hover:bg-white/[0.08] active:scale-95"
           >
             <X size={16} />

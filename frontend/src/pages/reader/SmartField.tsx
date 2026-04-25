@@ -1,4 +1,4 @@
-// MARK: - SmartField (dev-only)
+﻿// MARK: - SmartField (dev-only)
 // A field (input or textarea) with the native caret hidden and a thicker
 // blinking cyan caret overlaid via a hidden mirror div. Both the chapter
 // title and chapter body use this so caret behavior is identical.
@@ -62,10 +62,10 @@ export default function SmartField({
     caret.style.left = `${marker.offsetLeft}px`;
     caret.style.top = `${marker.offsetTop}px`;
     caret.style.height = cs.lineHeight;
-    caret.classList.add('mystory-caret--typing');
+    caret.classList.add('museum-caret--typing');
     window.clearTimeout((caret as unknown as { _t?: number })._t);
     (caret as unknown as { _t?: number })._t = window.setTimeout(
-      () => caret.classList.remove('mystory-caret--typing'),
+      () => caret.classList.remove('museum-caret--typing'),
       400,
     );
   }
@@ -107,8 +107,9 @@ export default function SmartField({
   return (
     <div className="relative">
       {multiline ? <textarea {...props} /> : <input type="text" {...props} />}
-      {focused && <span ref={caretRef} className="mystory-caret" aria-hidden />}
+      {focused && <span ref={caretRef} className="museum-caret" aria-hidden />}
       <div ref={mirrorRef} aria-hidden />
     </div>
   );
 }
+

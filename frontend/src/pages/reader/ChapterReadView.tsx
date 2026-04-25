@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+﻿import { memo, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Pencil } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -46,7 +46,7 @@ function ChapterReadView({ page, number, onEdit }: {
       {page.metadata.description && (
         <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{page.metadata.description}</p>
       )}
-      <div className="prose prose-invert prose-mystory max-w-none prose-sm sm:prose-base md:prose-lg prose-p:my-3 prose-p:leading-7 sm:prose-p:my-4 sm:prose-p:leading-8 prose-a:underline prose-a:underline-offset-4">
+      <div className="prose prose-invert prose-museum max-w-none prose-sm sm:prose-base md:prose-lg prose-p:my-3 prose-p:leading-7 sm:prose-p:my-4 sm:prose-p:leading-8 prose-a:underline prose-a:underline-offset-4">
         {md}
       </div>
     </section>
@@ -54,3 +54,4 @@ function ChapterReadView({ page, number, onEdit }: {
 }
 
 export default memo(ChapterReadView);
+

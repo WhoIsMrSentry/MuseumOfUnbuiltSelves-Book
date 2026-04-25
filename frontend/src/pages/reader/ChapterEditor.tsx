@@ -1,4 +1,4 @@
-// MARK: - ChapterEditor (dev-only)
+﻿// MARK: - ChapterEditor (dev-only)
 // Owns all draft state for a chapter (title + body) and renders the inline
 // editor UI: editable title in place of the <h2>, prose-styled body editor
 // with a custom thick blinking cyan caret, and Save / Cancel actions.
@@ -82,7 +82,7 @@ export default function ChapterEditor({ page, number, onClose }: {
       {page.metadata.description && (
         <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{page.metadata.description}</p>
       )}
-      <div className="prose prose-invert prose-mystory max-w-none prose-sm sm:prose-base md:prose-lg prose-p:my-3 prose-p:leading-7 sm:prose-p:my-4 sm:prose-p:leading-8 prose-a:underline prose-a:underline-offset-4">
+      <div className="prose prose-invert prose-museum max-w-none prose-sm sm:prose-base md:prose-lg prose-p:my-3 prose-p:leading-7 sm:prose-p:my-4 sm:prose-p:leading-8 prose-a:underline prose-a:underline-offset-4">
         <SmartField
           multiline
           value={bodyDraft}
@@ -113,3 +113,4 @@ export default function ChapterEditor({ page, number, onClose }: {
     </section>
   );
 }
+

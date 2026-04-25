@@ -18,6 +18,13 @@ export interface Page extends PageEntry {
   content: string;
   raw: string;
 }
+export interface QuoteEntry {
+  id: string;
+  bookSlug: string;
+  pageSlug: string;
+  chapterTitle: string;
+  text: string;
+}
 export interface Book {
   bookSlug: string;
   title: string;
@@ -67,6 +74,7 @@ type LoaderEntry = { bookSlug: string; pageSlug: string; load: RawLoader };
 
 let _loaderMap: Map<string, LoaderEntry> | null = null;
 let _indexCache: Book[] | null = null;
+let _quotesCache: Map<string, QuoteEntry[]> | null = null;
 
 function buildAll(): { loaders: Map<string, LoaderEntry>; books: Book[] } {
   if (_loaderMap && _indexCache) return { loaders: _loaderMap, books: _indexCache };
@@ -174,6 +182,57 @@ export async function getPageContent(bookSlug: string, pageSlug: string): Promis
   };
 }
 
+function extractQuotesFromBody(body: string): string[] {
+  const lines = body.split('\n');
+  const quotes: string[] = [];
+  let bucket: string[] = [];
+
+  const flush = () => {
+    if (!bucket.length) return;
+    const text = bucket.join(' ').replace(/\s+/g, ' ').trim();
+    if (text) quotes.push(text);
+    bucket = [];
+  };
+
+  for (const line of lines) {
+    const m = line.match(/^>\s?(.*)$/);
+    if (m) bucket.push(m[1]);
+    else flush();
+  }
+  flush();
+  return quotes;
+}
+
+export async function getBookQuotes(bookSlug: string): Promise<QuoteEntry[]> {
+  if (_quotesCache?.has(bookSlug)) return _quotesCache.get(bookSlug) || [];
+
+  const book = getBookBySlug(bookSlug);
+  if (!book) return [];
+
+  const out: QuoteEntry[] = [];
+  for (const page of book.pages) {
+    const raw = await fetchRaw(bookSlug, page.pageSlug);
+    if (!raw) continue;
+    const { meta, body } = parseRaw(raw);
+    const chapterTitle = meta.title || formatTitle(page.pageSlug);
+    const quotes = extractQuotesFromBody(body);
+
+    for (let i = 0; i < quotes.length; i += 1) {
+      out.push({
+        id: `${bookSlug}/${page.pageSlug}/${i + 1}`,
+        bookSlug,
+        pageSlug: page.pageSlug,
+        chapterTitle,
+        text: quotes[i],
+      });
+    }
+  }
+
+  if (!_quotesCache) _quotesCache = new Map<string, QuoteEntry[]>();
+  _quotesCache.set(bookSlug, out);
+  return out;
+}
+
 // MARK: - Dev-only: save raw MDX back to disk via Vite middleware
 export async function savePageRaw(bookSlug: string, pageSlug: string, content: string): Promise<void> {
   if (!import.meta.env.DEV) throw new Error('Editing is only allowed in dev');
@@ -210,5 +269,6 @@ export async function createNextChapter(book: Book, currentPageSlug: string): Pr
   // MARK: - Reset the cached index so the new page surfaces on next read.
   _loaderMap = null;
   _indexCache = null;
+  _quotesCache = null;
   return slug;
 }

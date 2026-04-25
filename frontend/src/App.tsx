@@ -16,7 +16,7 @@ function Fallback() {
 
 function App() {
   return (
-    <Router basename="/">
+    <Router basename="/MuseumOfUnbuiltSelves-Book/">
       <Suspense fallback={<Fallback />}>
         <Routes>
           <Route path="/" element={<Library />} />

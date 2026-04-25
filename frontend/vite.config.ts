@@ -11,7 +11,7 @@ import sitemap from './plugins/sitemap'
 // MARK: - Vite Configuration
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/MuseumOfUnbuiltSelves-Book/',
   plugins: [
     react(),
     tailwindcss(),
@@ -20,7 +20,7 @@ export default defineConfig({
     coverOptimize(),
     sitemap({
       storiesDir: path.resolve(__dirname, '../content/stories'),
-      siteUrl: 'https://whoismrsentry.github.io',
+      siteUrl: 'https://whoismrsentry.github.io/MuseumOfUnbuiltSelves-Book',
     }),
   ],
   resolve: {

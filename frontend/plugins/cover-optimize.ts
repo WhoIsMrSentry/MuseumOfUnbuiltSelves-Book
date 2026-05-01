@@ -1,4 +1,4 @@
-﻿// MARK: - cover-optimize Vite plugin
+// MARK: - cover-optimize Vite plugin
 // Build-time only. After Vite emits the production bundle, walks the asset
 // directory and generates `.webp` and `.avif` siblings for every PNG/JPG.
 // Also re-compresses the original PNG/JPG with sharp's better encoders so

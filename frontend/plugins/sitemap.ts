@@ -1,4 +1,4 @@
-﻿// MARK: - Vite Plugin: Sitemap Generator
+// MARK: - Vite Plugin: Sitemap Generator
 // Walks content/stories/**/*.mdx at build time and emits:
 //   - dist/sitemap.xml  - every book + every chapter
 //   - dist/robots.txt   - overrides public/robots.txt with absolute sitemap URL

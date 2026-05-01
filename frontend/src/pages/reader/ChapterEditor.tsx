@@ -1,4 +1,4 @@
-﻿// MARK: - ChapterEditor (dev-only)
+// MARK: - ChapterEditor (dev-only)
 // Owns all draft state for a chapter (title + body) and renders the inline
 // editor UI: editable title in place of the <h2>, prose-styled body editor
 // with a custom thick blinking cyan caret, and Save / Cancel actions.

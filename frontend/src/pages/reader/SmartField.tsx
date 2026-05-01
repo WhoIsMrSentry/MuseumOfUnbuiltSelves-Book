@@ -1,4 +1,4 @@
-﻿// MARK: - SmartField (dev-only)
+// MARK: - SmartField (dev-only)
 // A field (input or textarea) with the native caret hidden and a thicker
 // blinking cyan caret overlaid via a hidden mirror div. Both the chapter
 // title and chapter body use this so caret behavior is identical.

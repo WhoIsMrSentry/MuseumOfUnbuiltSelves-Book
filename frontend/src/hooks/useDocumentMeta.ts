@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 // MARK: - SEO meta hook
 // Updates <title>, description, canonical, OG/Twitter on route change.

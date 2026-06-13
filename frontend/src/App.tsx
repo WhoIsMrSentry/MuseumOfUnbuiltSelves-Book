@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LoaderCircle } from 'lucide-react';
+import RoamingBat from '@/components/RoamingBat';
 
 // MARK: - Lazy-loaded route components keep the initial bundle small.
 const Library = lazy(() => import('@/pages/Library'));
@@ -17,6 +18,7 @@ function Fallback() {
 function App() {
   return (
     <Router basename="/MuseumOfUnbuiltSelves-Book/">
+      <RoamingBat />
       <Suspense fallback={<Fallback />}>
         <Routes>
           <Route path="/" element={<Library />} />

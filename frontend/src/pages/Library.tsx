@@ -26,8 +26,8 @@ export default function Library() {
   }, []);
 
   return (
-    <div className="min-h-svh bg-[var(--bg)] text-[var(--text)]">
-      <div className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8 sm:py-16">
+    <div className="min-h-svh text-[var(--text)]">
+      <div className="relative z-10 mx-auto min-h-svh w-full max-w-5xl bg-[var(--bg)] px-5 py-10 max-sm:bg-transparent sm:px-8 sm:py-16">
         <Header />
         {books.length === 0
           ? <Empty />

@@ -29,7 +29,7 @@ function contentWidth(pathname: string) {
   return pathname.includes('/reader/') ? READER_CONTENT_MAX : LIBRARY_CONTENT_MAX;
 }
 
-function flyBounds(pathname: string, padding: number, mobile: boolean): Bounds {
+function flyBounds(pathname: string, padding: number): Bounds {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const panel = Math.min(vw, contentWidth(pathname));
@@ -78,8 +78,8 @@ export default function RoamingBat() {
   const hideOnMobileReader = pathname.includes('/reader/') && isMobileViewport();
   const [{ padding }, setMetrics] = useState(batMetrics);
   const [position, setPosition] = useState<Point>(() => {
-    const { padding: p, mobile } = batMetrics();
-    const bounds = flyBounds(pathname, p, mobile);
+    const { padding: p } = batMetrics();
+    const bounds = flyBounds(pathname, p);
     return {
       x: randomBetween(bounds.minX, bounds.maxX),
       y: randomBetween(bounds.minY, bounds.maxY),
@@ -127,7 +127,7 @@ export default function RoamingBat() {
     if (reducedMotion) return;
 
     const wander = () => {
-      const bounds = flyBounds(pathnameRef.current, paddingRef.current, mobileRef.current);
+      const bounds = flyBounds(pathnameRef.current, paddingRef.current);
       const target = nextPoint(positionRef.current, bounds);
       setFacingLeft(target.x < positionRef.current.x);
       setPosition(target);
@@ -139,7 +139,7 @@ export default function RoamingBat() {
     const metrics = batMetrics();
     mobileRef.current = metrics.mobile;
     paddingRef.current = metrics.padding;
-    const bounds = flyBounds(pathname, metrics.padding, metrics.mobile);
+    const bounds = flyBounds(pathname, metrics.padding);
     setPosition({
       x: randomBetween(bounds.minX, bounds.maxX),
       y: randomBetween(bounds.minY, bounds.maxY),

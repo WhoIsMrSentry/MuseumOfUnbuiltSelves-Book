@@ -87,7 +87,7 @@ export default function Reader() {
   if (!r.entry) return null;
 
   return (
-    <div className="relative min-h-svh bg-[var(--bg)] text-[var(--text)]" onClick={handleTap}>
+    <div className="relative min-h-svh text-[var(--text)]" onClick={handleTap}>
       <ProgressBar current={r.pageIndex + 1} total={r.total} />
 
       <Link
@@ -107,7 +107,7 @@ export default function Reader() {
         />
       )}
 
-      <article className="mx-auto max-w-3xl px-4 pb-28 pt-14 sm:px-6 md:px-8">
+      <article className="relative z-10 mx-auto max-w-3xl bg-[var(--bg)] px-4 pb-28 pt-14 sm:px-6 md:px-8">
         {r.page ? (
           <>
             <ChapterContent page={r.page} number={r.pageIndex + 1} />

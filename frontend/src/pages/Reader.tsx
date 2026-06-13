@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import BatPageTransition from '@/components/BatPageTransition';
+import { useBatChapterNav } from '@/hooks/useBatChapterNav';
 import { useReader } from '@/pages/useReader';
 import CenteredSpinner from '@/pages/reader/CenteredSpinner';
 import ProgressBar from '@/pages/reader/ProgressBar';
@@ -42,6 +44,18 @@ export default function Reader() {
   const [showSettings, setShowSettings] = useState(false);
   const [showQuotes, setShowQuotes] = useState(false);
   const [quotes, setQuotes] = useState<QuoteEntry[]>([]);
+  const [batTransition, setBatTransition] = useState(false);
+  const { goToSlug } = useBatChapterNav(bookSlug, setBatTransition);
+
+  const goPrev = useCallback(() => {
+    if (!r.book || !r.hasPrev || batTransition) return;
+    goToSlug(r.book.pages[r.pageIndex - 1].pageSlug);
+  }, [batTransition, goToSlug, r.book, r.hasPrev, r.pageIndex]);
+
+  const goNext = useCallback(() => {
+    if (!r.book || !r.hasNext || batTransition) return;
+    goToSlug(r.book.pages[r.pageIndex + 1].pageSlug);
+  }, [batTransition, goToSlug, r.book, r.hasNext, r.pageIndex]);
 
   // MARK: - Auto-hide the toolbar; reset timer whenever it becomes visible.
   useEffect(() => {
@@ -68,12 +82,12 @@ export default function Reader() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement)?.closest('button, a, input, textarea, select')) return;
-      if (e.key === 'ArrowLeft') r.goPrev();
-      else if (e.key === 'ArrowRight') r.goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+      else if (e.key === 'ArrowRight') goNext();
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [r.goPrev, r.goNext]);
+  }, [goPrev, goNext]);
 
   // MARK: - Tap middle band to toggle the toolbar.
   function handleTap(e: React.MouseEvent<HTMLDivElement>) {
@@ -88,6 +102,7 @@ export default function Reader() {
 
   return (
     <div className="relative min-h-svh text-[var(--text)]" onClick={handleTap}>
+      <BatPageTransition active={batTransition} />
       <ProgressBar current={r.pageIndex + 1} total={r.total} />
 
       <Link
@@ -116,6 +131,8 @@ export default function Reader() {
               prev={r.hasPrev ? r.book.pages[r.pageIndex - 1] : null}
               next={r.hasNext ? r.book.pages[r.pageIndex + 1] : null}
               onFinish={r.finish}
+              onChapterNavigate={goToSlug}
+              chapterNavDisabled={batTransition}
             />
             {import.meta.env.DEV && !r.hasNext && (
               <NewChapterButton book={r.book} currentPageSlug={r.entry.pageSlug} />
@@ -132,8 +149,8 @@ export default function Reader() {
           total={r.total}
           hasPrev={r.hasPrev}
           hasNext={r.hasNext}
-          onPrev={r.goPrev}
-          onNext={r.goNext}
+          onPrev={goPrev}
+          onNext={goNext}
           onSettings={() => { setShowSettings(true); setToolbar(true); }}
           entered={toolbarT.entered}
         />
